@@ -7,9 +7,7 @@ Deadwood: This is the main file in which the game is run. This class controls th
 sets the number of days, and calculates the winner.
 
 Player: This class is used to create players. It also has all the options a player can do during their turn such as
-move, work, and upgrade.
-
-Score: This class is a subclass of Player. It keeps track of each player's money, credits, rank, and practice chips.
+move, work, and upgrade. It also keeps track of each player's practice chips, money, credits, and rank.
 
 Board: This class keep track of which scenes are where and also the location of each player. It also flips the
 face down cards when needed.
