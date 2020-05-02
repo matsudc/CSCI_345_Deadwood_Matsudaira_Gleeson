@@ -1,5 +1,3 @@
-Deadwood:
-
 import java.util.Random;
 
 
