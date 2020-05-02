@@ -8,7 +8,7 @@ public class Deadwood{
   public static void main(String[] args){
     int playerCount;
     String[] playerName;
-    String[playerCount][4] playerScores;
+    String[][] playerScores;
     //playerCount lets us see how many players to playerCount
     //4 represents the 4 stats of each player; rank, credits, dollars, practice chips;
     //for loop to fill playerScores with proper info;
@@ -24,7 +24,7 @@ public class Deadwood{
     //setDays += 1;
     //reset board,
    //}
-    getScoreWinnner(playerScores);
+   // getScoreWinnner(playerScores);
   }
 
   public void roll(){
