@@ -1,3 +1,9 @@
+import Game.Player;
+import Game.Board;
+import Game.Scene;
+import Game.Deadwood;
+
+
 public class Location{
 
 int index;
