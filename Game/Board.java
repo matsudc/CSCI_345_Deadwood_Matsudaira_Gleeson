@@ -1,3 +1,8 @@
+import Game.Scene;
+import Game.Location;
+import Game.Deadwood;
+import Game.Player;
+
 public class Board{
 
   //2d array for layout of board.
