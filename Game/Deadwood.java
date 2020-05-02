@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import Player;
 import Board;
 
+=======
+>>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
 import java.util.Random;
+import Game.Player;
+import Game.Board;
+import Game.Scene;
+import Game.Location;
 
 
 public class Deadwood{
@@ -11,7 +18,11 @@ public class Deadwood{
   public static void main(String[] args){
     int playerCount;
     String[] playerName;
+<<<<<<< HEAD
     //String[playerCount][4] playerScores;
+=======
+    String[][] playerScores;
+>>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
     //playerCount lets us see how many players to playerCount
     //4 represents the 4 stats of each player; rank, credits, dollars, practice chips;
     //for loop to fill playerScores with proper info;
@@ -31,9 +42,13 @@ public class Deadwood{
     //setDays += 1;
     //reset board -> pair new locations w/ new scenes
    //}
+<<<<<<< HEAD
 
     //getScoreWinnner(playerScores);
     System.out.println("test");
+=======
+   // getScoreWinnner(playerScores);
+>>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
   }
 
   public void roll(){

@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 import Board;
+=======
+import Game.Player;
+import Game.Board;
+import Game.Scene;
+import Game.Deadwood;
+
+>>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
 
 public class Location{
 
