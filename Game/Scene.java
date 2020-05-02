@@ -1,5 +1,3 @@
-Scene:
-
 public class Scene{
   //We will have a spread sheet that gets called by a scanner into an array that has each card
   //the first array will be all the scenes possible, the second is a check to see if it was used or not already (1 or 0)
