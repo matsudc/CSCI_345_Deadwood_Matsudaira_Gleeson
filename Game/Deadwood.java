@@ -1,4 +1,8 @@
 import java.util.Random;
+import Game.Player;
+import Game.Board;
+import Game.Scene;
+import Game.Location;
 
 
 public class Deadwood{
