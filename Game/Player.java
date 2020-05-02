@@ -1,3 +1,10 @@
+import Game.Board;
+import Game.Scene;
+import Game.Location;
+import Game.Deadwood;
+
+
+
 public class Player{
 
 String name;

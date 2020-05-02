@@ -1,4 +1,7 @@
-Scene:
+import Game.Player;
+import Game.Board;
+import Game.Location;
+import Game.Deadwood;
 
 public class Scene{
   //We will have a spread sheet that gets called by a scanner into an array that has each card
