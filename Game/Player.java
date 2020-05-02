@@ -5,6 +5,9 @@ int credits;
 int money;
 int rank;
 int practice;
+int location;
+boolean card;
+int roleRank;
 
  public void Player(String name){
    this.name = name;
@@ -12,6 +15,9 @@ int practice;
    this.credit = 0;
    this.money = 0;
    this.practice = 0;
+   this.location = 0;
+   this.card = false;
+   this.roleRank = -1;
  }
 
  public void resetPractice(){
@@ -22,8 +28,15 @@ int practice;
    this.credits = this.credits +1;
  }
 
- public increaseMoney(){
+ public void increaseMoney(){
    this.money = this.money +1;
+ }
+
+ public void takeRole(){
+   //get role rank and save in rankRole
+   //update card: true or false
+
+   System.out.printlkn("Take Role");
  }
 
  public void upgradeRank(){
@@ -31,16 +44,16 @@ int practice;
    if (this.rank < 6){
      this.rank = this.rank +1;
    } else {
-     System.println("Max rank. Unable to upgrade.");
+     System.out.println("Max rank. Unable to upgrade.");
    }
  }
 
  public void move(){
-   //move player
-   //find location of player
-   //tell player possible locations to move to
-   //player chooses location
-   //move player to location on board
+   //look at location for possible moves
+   //int newLocation = player choose possible locations
+   //if ok move:
+    //this.location = newLocation
+   System.out.println("Move");
  }
 
  public void work(int choice){
