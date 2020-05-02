@@ -1,32 +1,46 @@
+<<<<<<< HEAD
+import Board;
+=======
 import Game.Player;
 import Game.Board;
 import Game.Location;
 import Game.Deadwood;
+>>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
 
 public class Scene{
-  //We will have a spread sheet that gets called by a scanner into an array that has each card
-  //the first array will be all the scenes possible, the second is a check to see if it was used or not already (1 or 0)
 
-  String[40][5] allScene;
-  // (getScene[x][0] = used or not used)
-  // (getScene[x][1] = budget)
-  // (getScene[x][2] = #number of roles)
-  // (getScene[x][3] = role 1 rank)
-  // (getScene[x][4] = role 2 rank)
-  // (getScene[x][5] = role 3 rank ) if doesnt have 3rd rank -1;
+  int sceneNum;
+  int budget;
+  int[] roles;
+  String name;
+  boolean use;
 
-  //loop for putting non-used scenes into the board at correct spots
-  // for(int i = 1, i < 11; i++){
-  //      if(i = 6){
-  //        i++;
-  //      }else{
-  //   String[][] scene = random.getScene;
-  //   while(scene[][0] != 0){
-  //     scene = random.getScene;
-  //   }
-  //       boardLayout[i] = scene[]
-  //       getScene[i][1];
-  // }
-  //}
+  public void Scene(String name, int budget, int[] roles, int num){
+    this.name = name;
+    this.budget = budget;
+    this.roles = roles;
+    this.use = true;
+    this.sceneNum = num;
+  }
+
+  public void updateUse(){
+    this.use = false;
+  }
+
+  public boolean getUse(){
+    return this.use;
+  }
+
+  public void updateRoles(int index){
+    this.roles[index] = -1;
+  }
+
+  public int[] getRoles(){
+    return this.roles;
+  }
+
+  public int getBudget(){
+    return this.budget;
+  }
 
 }
