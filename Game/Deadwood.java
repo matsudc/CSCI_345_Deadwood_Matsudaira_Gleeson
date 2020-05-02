@@ -1,4 +1,5 @@
-Deadwood:
+import Player;
+import Board;
 
 import java.util.Random;
 
@@ -10,23 +11,29 @@ public class Deadwood{
   public static void main(String[] args){
     int playerCount;
     String[] playerName;
-    String[playerCount][4] playerScores;
+    //String[playerCount][4] playerScores;
     //playerCount lets us see how many players to playerCount
     //4 represents the 4 stats of each player; rank, credits, dollars, practice chips;
     //for loop to fill playerScores with proper info;
 
+    //build board
+    //Board game = new Board();
+
     //setDays depends on playercount info
     int setDays;
     int dayCounter = 1;
+
     //while setDays + 1 != dayCounter{
       //while(scenes left on board){
       //call players 1 by 1;
+        //}
 
-    //}
     //setDays += 1;
-    //reset board,
+    //reset board -> pair new locations w/ new scenes
    //}
-    getScoreWinnner(playerScores);
+
+    //getScoreWinnner(playerScores);
+    System.out.println("test");
   }
 
   public void roll(){

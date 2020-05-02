@@ -14,3 +14,5 @@ face down cards when needed.
 
 Scene: This is a subclass of Board and has all the information needed for each scene such as number of on card roles, number of
 off card roles, shot counters, scene's budget, and it also checks to see if a scene is complete.
+
+Location: Has the information for each location on the board such as possible moves from this spot, shot counters, off card roles, etc.

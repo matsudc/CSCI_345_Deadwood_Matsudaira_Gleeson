@@ -1,3 +1,7 @@
+import Board;
+import Scene;
+import Location;
+
 public class Player{
 
 String name;
@@ -18,6 +22,11 @@ int roleRank;
    this.location = 0;
    this.card = false;
    this.roleRank = -1;
+ }
+
+ public void resetLocation(){
+   this.location = 0;
+   this.card = false;
  }
 
  public void resetPractice(){
