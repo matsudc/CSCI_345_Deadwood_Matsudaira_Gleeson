@@ -1,5 +1,3 @@
-Board:
-
 public class Board{
 
   //2d array for layout of board.
