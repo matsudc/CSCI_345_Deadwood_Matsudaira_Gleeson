@@ -15,7 +15,7 @@ public class Scene{
   String name;
   boolean use;
 
-  public void Scene(String name, int budget, int[] roles, int num){
+  public void Scene(int num, String name, int budget, int[] roles){
     this.name = name;
     this.budget = budget;
     this.roles = roles;
@@ -43,4 +43,7 @@ public class Scene{
     return this.budget;
   }
 
+  public String getName(){
+    return this.name;
+  }
 }
