@@ -63,7 +63,7 @@ System.out.println("Welcome to Deadwood. The game of all games");
 
 
     Board game = new Board();
-    game.buildBoard();
+   // game.buildBoard();
 
     //while(dayCounter < setDays) {
     //outer loop that will go until day done

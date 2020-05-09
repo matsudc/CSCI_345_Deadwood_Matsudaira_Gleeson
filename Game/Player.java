@@ -1,15 +1,13 @@
-<<<<<<< HEAD
-import Board;
-import Scene;
-import Location;
-=======
-import Game.Board;
-import Game.Scene;
-import Game.Location;
-import Game.Deadwood;
+package Game;
 
 
->>>>>>> 127684a4f09102ebc088625524025bfc4ae11a06
+//import Game.Board;
+//import Game.Scene;
+//import Game.Location;
+//import Game.Deadwood;
+
+
+
 
 public class Player{
 
@@ -25,7 +23,7 @@ int roleRank;
  public void Player(String name){
    this.name = name;
    this.rank = 1;
-   this.credit = 0;
+   this.credits = 0;
    this.money = 0;
    this.practice = 0;
    this.location = 0;
@@ -54,7 +52,7 @@ int roleRank;
    //get role rank and save in rankRole
    //update card: true or false
 
-   System.out.printlkn("Take Role");
+   System.out.println("Take Role");
  }
 
  public void upgradeRank(){
@@ -84,21 +82,21 @@ int roleRank;
 
      //compare to budget
 
-     //if sucessful:
+     //if successful:
       //remove shot counter
       //check to see if scene is wrapped
 
         //if wrapped:
-        //see if a player is on card -> pay bonues
+        //see if a player is on card -> pay bonus
         //reset practice chips
 
     //if failed:
       //if player off card:
         //pay receives $1
 
-    System.println("work");
+    System.out.println("work");
   } else {
-    System.out.println("Unable to practice. Too many practice chips")
+    System.out.println("Unable to practice. Too many practice chips");
   }
 }
 
