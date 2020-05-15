@@ -1,48 +1,69 @@
 package Game;
 
+
 //import Game.Player;
 //import Game.Board;
-//import Game.Location;
+//import Game.Scene;
 //import Game.Deadwood;
 
 
-public class Scene{
+public class Location{
 
-  int sceneNum;
-  int budget;
-  int[] roles;
-  String name;
-  boolean use;
+int index;
+int shot;
+int[] role;
+int[] moves;
+String name;
 
-  public void Scene(int num, String name, int budget, int[] roles){
+ public Location(int index, String name, int[] moves){
+    this.index = index;
     this.name = name;
-    this.budget = budget;
-    this.roles = roles;
-    this.use = true;
-    this.sceneNum = num;
+    this.moves = moves;
   }
 
-  public void updateUse(){
-    this.use = false;
+
+  public Location(int index, String name, int[] moves, int[] roles, int shot){
+    this.index = index;
+    this.name = name;
+    this.moves = moves;
+    this.shot = shot;
+    this.role = roles;
   }
 
-  public boolean getUse(){
-    return this.use;
+  public Location() {
+this.index = index;
+this.name = name;
+this.moves = moves;
+this.shot = shot;
+
   }
 
-  public void updateRoles(int index){
-    this.roles[index] = -1;
+
+  public int getIndex(){
+ return this.index;
   }
 
   public int[] getRoles(){
-    return this.roles;
+    return this.role;
   }
 
-  public int getBudget(){
-    return this.budget;
+  public void updateRoles(int index){
+    this.role[index] = -1;
+  }
+
+  public void updateShot(){
+    this.shot = this.shot - 1;
+  }
+
+  public int getShot(){
+    return this.shot;
   }
 
   public String getName(){
     return this.name;
+  }
+
+  public int[] getMoves(){
+    return this.moves;
   }
 }

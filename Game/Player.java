@@ -31,6 +31,16 @@ int roleRank;
    this.roleRank = -1;
  }
 
+
+ public void increaseCredits(){
+  this.credits = this.credits +1;
+}
+
+ public int getcredits(String name) {
+this.name = name;
+return this.credits;
+ }
+
  public void resetLocation(){
    this.location = 0;
    this.card = false;
@@ -40,8 +50,24 @@ int roleRank;
    this.practice = 0;
  }
 
- public void increaseCredits(){
-   this.credits = this.credits +1;
+
+ public void increaseRank(){
+  this.rank = this.rank +1;
+ }
+
+ public int getRank(String name) {
+this.name = name;
+return this.rank;
+ }
+
+ public int getLocation(String name) {
+this.name = name;
+return this.location;
+ }
+
+ public void updateLocation(String name, int new_location) {
+this.name = name;
+this.location = new_location;
  }
 
  public void increaseMoney(){
