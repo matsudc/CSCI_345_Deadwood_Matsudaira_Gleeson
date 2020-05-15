@@ -90,6 +90,9 @@ int [] moving11 = new int[] {0,8,10};
 int [] rolling11 = new int[] {1,2,2,4};
 Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 
+int[] rolling12 = new int[] {0};
+Scene scene40 = new Scene(0, "none", 0, rolling12);
+
 
 
 
@@ -220,9 +223,7 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		    
 		    roles = new int[] {2,4,6};
 		    Scene scene39 = new Scene(40, "Custer’s Other Stands", 5, roles);
-		    
-		    roles = new int[] {0};
-		    Scene scene40 = new Scene(0, "none", 0, roles);
+		   
 		
 		Location[] locationArr = new Location[] { hotel, church, bank, ranch, hideout, train, jail, store, saloon, mainSt};
 		Scene[] sceneArr = new Scene[] {scene0,scene1,scene2,scene3,scene4,scene5,scene6,scene7,scene8,scene9,scene10,scene11,scene12,scene13,scene14,scene15,scene16,scene17,scene18,scene19,scene20,scene21,scene22,scene23,scene24,scene25,scene26,scene27,scene28, scene29,scene30,scene31,scene32,scene33,scene34,scene35,scene36,scene37,scene38,scene39};
@@ -278,7 +279,7 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 	public HashMap<Location, Scene> resetBoard() {
 		this.boardPairs.clear();
 		
-		pairSceneLoc(this.locationArr, this.sceneArr);
+		pairSceneLoc(this.locationArr, this.sceneArr, this.trailer, this.casting, this.scene40);
 		
 		return this.boardPairs;
 	}
@@ -293,20 +294,34 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		}
 	}
 	
-//	public Location getLocation(int index) {
-//		
-//		if (index == 0) {
-//			return trailer;
-//		} else if (index == 1) {
-//			
-//		}else if (index == 2) {
-//			
-//		}else if (index == 3) {
-//			
-//		}else if (index == 4) {
-//			
-//		}else if (index )
-//	}
+	public Location getLocation(int index) {
+		
+		if (index == 0) {
+			return trailer;
+		} else if (index == 1) {
+			return hotel;
+		}else if (index == 2) {
+			return church;
+		}else if (index == 3) {
+			return bank;
+		}else if (index == 4) {
+			return ranch;
+		}else if (index == 5) {
+			return hideout;
+		}else if (index == 6) {
+			return casting;
+		}else if (index == 7) {
+			return train;
+		}else if (index == 8) {
+			return jail;
+		} else if (index == 9) {
+			return store;
+		}else if (index == 10) {
+			return saloon;
+		}else if (index == 11) {
+			return mainSt;
+		}
+	}
 	
   public void printName(int location){
 
