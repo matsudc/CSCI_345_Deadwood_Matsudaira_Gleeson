@@ -30,7 +30,7 @@ System.out.println("Welcome to Deadwood. The game of all games");
     startCredits = 4;
     }else if (playerCount < 9) {
     setDays = 4;
-    startRank = 2;
+    startRank = 1;
     } else {
     System.out.println("Too many players to player game");
     return;
@@ -39,31 +39,44 @@ System.out.println("Welcome to Deadwood. The game of all games");
     String[] playerName = new String[playerCount];
     int i = 0;
 
+    Player playerstat = new Player();
+    int playerCredits = 0;
+
     while (i < playerCount) {
     Scanner name = new Scanner(System.in);
     System.out.println("Please enter player " + (i + 1) + " name ");
     playerName[i] = name.nextLine();
-    // playerName[i].Credits += startCredits;
-    // playerName[i].Rank += startRank;
-    //  set each player to location(0) at start;
+        playerstat.Player(playerName[i]);
+        //set up each players starting credits
+        if(startCredits > 0) {
+       for(int k = 0; k < startCredits; k++) {
+        playerstat.increaseCredits();
+       }
+        }
+        //set up each players starting credits
+        if(startRank == 1) {
+        playerstat.increaseRank();
+       }
+    // Each player automatically starts at location 0 (Trailer)
     i++;
     }
-    int rand_value = (int)(Math.random()*playerCount);
-    System.out.println("ATTENTION ALL ACTORS. WELCOME TO THE STUDIO OF DEADWOOD");
-    System.out.println("For the next " + setDays + " days, you all will be working set scenes trying to become the ULTIMATE ACTOR OF DEADWOOD");
-    System.out.println("Best of luck to you all! p.s I've got money on you " + playerName[rand_value] + " so dont mess this up.");
-    int j = 0;
-    Board boardObject = new Board();
-  //  boardObject.buildBoard();
-
-
-    //String[playerCount][4] playerScores;
+    //BEGINNING SPEECH
+  //  int rand_value = (int)(Math.random()*playerCount);
+  //  System.out.println("ATTENTION ALL ACTORS. WELCOME TO THE STUDIO OF DEADWOOD");
+  //  System.out.println("For the next " + setDays + " days, you all will be working set scenes trying to become the ULTIMATE ACTOR OF DEADWOOD");
+  //  System.out.println("Best of luck to you all! p.s I've got money on you " + playerName[rand_value] + " so dont mess this up.");
 
 
 
+//    int rank = playerstat.getRank(playerName[0]);
+//    int cred = playerstat.getcredits(playerName[0]);
+//    int location = playerstat.getLocation(playerName[0]);
+//    System.out.println("This is rank of " + playerName[0] + (" ") + rank);
+//    System.out.println("This is credits of " + playerName[0] + (" ") + cred);
+//    System.out.println("This is location of " + playerName[0] + (" ") + location);
 
-    Board game = new Board();
-   // game.buildBoard();
+
+
 
     //while(dayCounter < setDays) {
     //outer loop that will go until day done
@@ -74,12 +87,20 @@ System.out.println("Welcome to Deadwood. The game of all games");
 
     int dayCounter = 1;
     System.out.println("Day " + dayCounter + " has officaly begun!");
+    int j = 0;
+
+    Board boardloc = new Board();
+
 
     //will be changed to while scene_num != 1 so each player will continue in this loop until only 1 scene left, then day resets and you go again.
     while(j < playerCount) {
+    int location = playerstat.getLocation(playerName[j]);
+    int cred = playerstat.getcredits(playerName[j]);
+    int rank = playerstat.getRank(playerName[j]);
+
 
     //get location and status of player to see if they are able to move or if they are in scene
-    System.out.println(playerName[j] + " what would you like to do on your turn?");
+    System.out.println(playerName[j] + " you are at location " + location + ". What would you like to do on your turn?");
     System.out.println("m for Move, w for Work?, u for upgrade, or nothing");
     Scanner turn_input = new Scanner(System.in);
     String choice = turn_input.nextLine();
@@ -87,6 +108,53 @@ System.out.println("Welcome to Deadwood. The game of all games");
     if(choice.equalsIgnoreCase("m")) {
     System.out.println("You choose to move!");
     System.out.println("Where would you like to go?");
+
+
+    int moves[] = boardloc.moveCount(location);
+    int x = 0;
+    while(x < moves.length) {
+    boardloc.buildBoard(moves[x], 2);
+    if(x + 1 != moves.length) {
+    System.out.print(" or ");
+    }
+    x++;
+    }
+    System.out.println(" ");
+        Scanner move_input = new Scanner(System.in);
+        String move_choice = move_input.nextLine();
+        if(moves.length == 3) {
+        if(move_choice.equalsIgnoreCase(boardloc.locationName(moves[0]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[0]));
+        playerstat.updateLocation(playerName[j], moves[0]);
+        }else if(move_choice.equalsIgnoreCase(boardloc.locationName(moves[1]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[1]));
+
+        playerstat.updateLocation(playerName[j], moves[1]);
+        }else if (move_choice.equalsIgnoreCase(boardloc.locationName(moves[2]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[2]));
+        playerstat.updateLocation(playerName[j], moves[2]);
+        }else {
+        System.out.println("Not a location available to go to");
+        }
+        } else { //move length is 4
+        if(move_choice.equalsIgnoreCase(boardloc.locationName(moves[0]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[0]));
+        playerstat.updateLocation(playerName[j], moves[0]);
+        }else if(move_choice.equalsIgnoreCase(boardloc.locationName(moves[1]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[1]));
+        playerstat.updateLocation(playerName[j], moves[1]);
+        }else if (move_choice.equalsIgnoreCase(boardloc.locationName(moves[2]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[2]));
+        playerstat.updateLocation(playerName[j], moves[2]);
+        }else if (move_choice.equalsIgnoreCase(boardloc.locationName(moves[3]))) {
+        System.out.println("You moved to " + boardloc.locationName(moves[3]));
+        playerstat.updateLocation(playerName[j], moves[3]);
+        } else {
+        System.out.println("Not a location available to go to");
+        }
+        }
+    // System.out.println("You can move to " + boardloc.buildBoard(0, parameter))
+
     //playerName[j].location[3] should give players possible choices of location
     //scanner to read where they want to go.
     //add following options for what ever they choose to do after moving (taking role, upgrading, nothing)

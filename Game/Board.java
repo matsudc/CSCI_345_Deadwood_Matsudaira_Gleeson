@@ -25,49 +25,193 @@ public class Board{
   // saloon = 10
   // main street = 11
   //------------------------------------
+int[] moving0 = new int[]{1, 10 , 11};
+Location trailer = new Location(0, "Trailer", moving0);
+// trailer.Location(0, "Trailer", moving);
+
+int[] moving1 = new int[] {0,2,3};
+int[] rolling1 = new int[] {1, 1, 2, 3};
+Location hotel = new Location(1, "Hotel", moving1, rolling1 , 3);
+   // hotel.Location(1, "Hotel", [0, 2, 3], [1, 1, 2, 3] , 3);
+
+int [] moving2 = new int[] {1,3,5};
+int [] rolling2 = new int[] {1,2};
+Location church = new Location(2, "Church", moving2, rolling2, 2);
+ // church.Location(2, "Church", moving, rolling, 2);
+
+int [] moving3 = new int[] {1,2,4,10};
+int [] rolling3 = new int[] {2,3};
+Location bank = new Location(3, "Bank", moving3, rolling3, 1);
+ // bank.Location(3, "Bank", moving, rolling, 1);
+
+int [] moving4 = new int[] {3,5,6,9};
+int[] rolling4 = new int[] {1,2,3};
+Location ranch = new Location(4, "Ranch", moving4, rolling4, 2);
+ // ranch.Location(4, "Ranch", moving, rolling, 2);
+
+int [] moving5 = new int[] {2,4,6};
+int [] rolling5 = new int[] {1,2,3,4};
+Location hideout = new Location(5, "Secret Hideout", moving5, rolling5, 3);
+ // hideout.Location(5, "Hideout", moving, rolling, 3);
+
+int [] moving6 = new int[] {4,5,7};
+Location casting = new Location(6, "Casting", moving6);
+ // casting.Location(6, "Casting", moving);
+
+int [] moving7 = new int[] {6,8,9};
+int [] rolling7 = new int[] {1,1,2,4};
+Location train = new Location(7, "Train Station", moving7, rolling7, 3);
+ // train.Location(7, "Train", moving, rolling, 3);
+
+int [] moving8 = new int[] {7,9,11};
+int [] rolling8 = new int[] {2,3};
+Location jail = new Location(8, "Jail", moving8, rolling8, 1);
+ // jail.Location(8, "Jail", moving, rolling, 1);
+
+int [] moving9 = new int[] {4,7,8,10};
+int [] rolling9 = new int[] {1,3};
+Location store = new Location(9, "General Store", moving9, rolling9, 2);
+ // store.Location(9, "Store", moving, rolling, 2);
+
+int [] moving10 = new int[] {0,3,9,11};
+int [] rolling10 = new int[] {1,2};
+Location saloon = new Location(10, "Saloon", moving10, rolling10, 2);
+ // saloon.Location(10, "Saloon", moving, rolling, 2);
+
+int [] moving11 = new int[] {0,8,10};
+int [] rolling11 = new int[] {1,2,2,4};
+Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
+
+
+
 
   //build board, sets locations info and pairs with scenes -> hashmap?
   //need to return location/scene pairs
-  public void buildBoard(){
-int[] moving = new int[]{1, 10 , 11};
+  public void buildBoard(int location, int parameter){
+
+   // Location name = new Location(index, name, int[moves], int[roles], shot)
+/* int[] moving = new int[]{1, 10 , 11};
+Location trailer = new Location(0, "Trailer", moving);
+// trailer.Location(0, "Trailer", moving);
+
+moving = new int[] {0,2,3};
 int[] rolling = new int[] {1, 1, 2, 3};
-    //Location name = new location(index, name, int[moves], int[roles], shot)
-   // Location trailer = new Location();
-   // trailer.Location(0, "Trailer", [1, 10, 11]);
- // trailer.Location(0, "Trailer" , moving);
-   // Location hotel = new Location();
+Location hotel = new Location(1, "Hotel", moving, rolling , 3);
     // hotel.Location(1, "Hotel", [0, 2, 3], [1, 1, 2, 3] , 3);
 
-  //  Location church = new Location();
-  // church.Location(2, "Church", [1, 3, 5], [1,2], 2);
+moving = new int[] {1,3,5};
+rolling = new int[] {1,2};
+Location church = new Location(2, "Church", moving, rolling, 2);
+  // church.Location(2, "Church", moving, rolling, 2);
 
-//  Location bank = new Location();
-  // bank.Location(3, "Bank", [1, 2, 4, 10], [2,3], 1);
+moving = new int[] {1,2,4,10};
+rolling = new int[] {2,3};
+Location bank = new Location(3, "Bank", moving, rolling, 1);
+  // bank.Location(3, "Bank", moving, rolling, 1);
 
-  //Location ranch = new Location();
-  // ranch.Location(4, "Ranch", [3, 5, 6, 9], [1, 2,3], 2);
+moving = new int[] {3,5,6,9};
+rolling = new int[] {1,2,3};
+Location ranch = new Location(4, "Ranch", moving, rolling, 2);
+  // ranch.Location(4, "Ranch", moving, rolling, 2);
 
- // Location hideout = new Location();
-  // hideout.Location(5, "Hideout", [2, 4, 6], [1, 2, 3, 4], 3);
+moving = new int[] {2,4,6};
+rolling = new int[] {1,2,3,4};
+Location hideout = new Location(5, "Secret Hideout", moving, rolling, 3);
+  // hideout.Location(5, "Hideout", moving, rolling, 3);
 
-  //Location casting = new Location();
-  // casting.Location(6, "Casting", [4, 5, 7]);
+moving = new int[] {4,5,7};
+Location casting = new Location(6, "Casting", moving);
+  // casting.Location(6, "Casting", moving);
 
-  //Location train = new Location();
-  // train.Location(7, "Train", [6, 8, 9], [1, 1, 2, 4], 3);
+moving = new int[] {6,8,9};
+rolling = new int[] {1,1,2,4};
+Location train = new Location(7, "Train Station", moving, rolling, 3);
+  // train.Location(7, "Train", moving, rolling, 3);
 
-  //Location jail = new Location();
-  // jail.Location(8, "Jail", [7, 9, 11], [2, 3], 1);
+moving = new int[] {7,9,11};
+rolling = new int[] {2,3};
+Location jail = new Location(8, "Jail", moving, rolling, 1);
+  // jail.Location(8, "Jail", moving, rolling, 1);
 
-  //Location store = new Location();
-  // store.Location(9, "Store", [4, 7, 8, 10], [1, 3], 2);
+moving = new int[] {4,7,8,10};
+rolling = new int[] {1,3};
+Location store = new Location(9, "General Store", moving, rolling, 2);
+  // store.Location(9, "Store", moving, rolling, 2);
 
-  //Location saloon = new Location();
-  // saloon.Location(10, "Saloon", [0, 3, 9, 11], [1,2], 2);
+moving = new int[] {0,3,9,11};
+rolling = new int[] {1,2};
+Location saloon = new Location(10, "Saloon", moving, rolling, 2);
+  // saloon.Location(10, "Saloon", moving, rolling, 2);
 
-  //Location mainSt = new Location();
-  // mainSt.Location(11, "MainSt", [0, 8, 10], [1, 2, 2, 4], 3);
+moving = new int[] {0,8,10};
+rolling = new int[] {1,2,2,4};
+Location mainSt = new Location(11, "MainSt", moving, rolling, 3);
+  // mainSt.Location(11, "MainSt", moving, rolling, 3);
+*/
 
+if(parameter == 2) {
+if(location == 0) {
+System.out.print(trailer.getName());
+}else if (location == 1) {
+System.out.print(hotel.getName());
+}else if (location == 2) {
+System.out.print(church.getName());
+}else if (location == 3) {
+System.out.print(bank.getName());
+}else if (location == 4) {
+System.out.print(ranch.getName());
+}else if (location == 5) {
+System.out.print(hideout.getName());
+}else if (location == 6) {
+System.out.print(casting.getName());
+}else if (location == 7) {
+System.out.print(train.getName());
+}else if (location == 8) {
+System.out.print(jail.getName());
+}else if (location == 9) {
+System.out.print(store.getName());
+}else if (location == 10) {
+System.out.print(saloon.getName());
+}else if (location == 11) {
+System.out.print(mainSt.getName());
+}else {
+System.out.println("Not an index value");
+}
+}
+
+/* if(parameter == 3) {
+if(location == 0) {
+moveCount(trailer);
+}else if (location == 1) {
+moveCount(hotel);
+}else if (location == 2) {
+moveCount(church);
+}else if (location == 3) {
+moveCount(bank);
+}else if (location == 4) {
+moveCount(ranch);
+}else if (location == 5) {
+moveCount(hideout);
+}else if (location == 6) {
+moveCount(casting);
+}else if (location == 7) {
+moveCount(train);
+}else if (location == 8) {
+moveCount(jail);
+}else if (location == 9) {
+moveCount(store);
+}else if (location == 10) {
+moveCount(saloon);
+}else if (location == 11) {
+moveCount(mainSt);
+}else {
+System.out.println("Not an index value");
+}
+}
+
+*/
+
+return;
     //scene name = new scene(index, name, budget, int[roles])
 /*
     Scene scene0 = new Scene(7, "Evil Wears a Hat", 4, [2,3,4]);
@@ -124,9 +268,70 @@ int[] rolling = new int[] {1, 1, 2, 3};
     */
   }
 
+public int[] moveCount(int location) {
+if(location == 0) {
+return trailer.getMoves();
+}else if (location == 1) {
+return hotel.getMoves();
+}else if (location == 2) {
+return church.getMoves();
+}else if (location == 3) {
+return bank.getMoves();
+}else if (location == 4) {
+return ranch.getMoves();
+}else if (location == 5) {
+return hideout.getMoves();
+}else if (location == 6) {
+return casting.getMoves();
+}else if (location == 7) {
+return train.getMoves();
+}else if (location == 8) {
+return jail.getMoves();
+}else if (location == 9) {
+return store.getMoves();
+}else if (location == 10) {
+return saloon.getMoves();
+}else if (location == 11) {
+return mainSt.getMoves();
+}else {
+return trailer.getMoves();
+}
+}
+
+public String locationName(int location) {
+if(location == 0) {
+return (trailer.getName());
+}else if (location == 1) {
+return (hotel.getName());
+}else if (location == 2) {
+return (church.getName());
+}else if (location == 3) {
+return (bank.getName());
+}else if (location == 4) {
+return (ranch.getName());
+}else if (location == 5) {
+return (hideout.getName());
+}else if (location == 6) {
+return (casting.getName());
+}else if (location == 7) {
+return (train.getName());
+}else if (location == 8) {
+return (jail.getName());
+}else if (location == 9) {
+return (store.getName());
+}else if (location == 10) {
+return (saloon.getName());
+}else if (location == 11) {
+return (mainSt.getName());
+}else {
+return ("Not an index value");
+}
+}
+
   //this will have 10 scenes, all with budget, #of roles, and then rank of each role available
 public void resetBoard(){
   //sets all used scenes to false -> unable to use again
   //pairs new scenes with locations
 }
+
 }
