@@ -96,7 +96,7 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
   //build board, sets locations info and pairs with scenes -> hashmap?
   //need to return location/scene pairs
 
-	public void buildBoard() {
+	public HashMap<Location, Scene> buildBoard() {
 		
 		//scene name = new scene(index, name, budget, int[roles])
 			
@@ -220,6 +220,9 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		    
 		    roles = new int[] {2,4,6};
 		    Scene scene39 = new Scene(40, "Custer’s Other Stands", 5, roles);
+		    
+		    roles = new int[] {0};
+		    Scene scene40 = new Scene(0, "none", 0, roles);
 		
 		Location[] locationArr = new Location[] { hotel, church, bank, ranch, hideout, train, jail, store, saloon, mainSt};
 		Scene[] sceneArr = new Scene[] {scene0,scene1,scene2,scene3,scene4,scene5,scene6,scene7,scene8,scene9,scene10,scene11,scene12,scene13,scene14,scene15,scene16,scene17,scene18,scene19,scene20,scene21,scene22,scene23,scene24,scene25,scene26,scene27,scene28, scene29,scene30,scene31,scene32,scene33,scene34,scene35,scene36,scene37,scene38,scene39};
@@ -237,11 +240,13 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		this.locationArr = locationArr;
 		this.sceneArr = sceneArr;
 		
-		pairSceneLoc(locationArr, sceneArr);
+		pairSceneLoc(locationArr, sceneArr, trailer, casting, scene40);
+		
+		return this.boardPairs;
 		
 	}
 	
-	public void pairSceneLoc (Location[] locationArr, Scene[] sceneArr) {
+	public void pairSceneLoc (Location[] locationArr, Scene[] sceneArr, Location trailer, Location casting, Scene scene40) {
 		
 		HashMap<Location, Scene> boardPairs = new HashMap<Location, Scene>();
 		
@@ -262,13 +267,20 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 			
 		}
 		
+		boardPairs.put(trailer, scene40);
+		boardPairs.put(casting, scene40);
+		
 		this.boardPairs = boardPairs;
 	}
 	
-	public void resetBoard() {
+	//clears hashmap
+	//pairs new scenes with locations
+	public HashMap<Location, Scene> resetBoard() {
 		this.boardPairs.clear();
 		
 		pairSceneLoc(this.locationArr, this.sceneArr);
+		
+		return this.boardPairs;
 	}
 	
 	public void printBoardPairs() {
@@ -281,11 +293,23 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		}
 	}
 	
-  public void printName(int location, int parameter){
+//	public Location getLocation(int index) {
+//		
+//		if (index == 0) {
+//			return trailer;
+//		} else if (index == 1) {
+//			
+//		}else if (index == 2) {
+//			
+//		}else if (index == 3) {
+//			
+//		}else if (index == 4) {
+//			
+//		}else if (index )
+//	}
+	
+  public void printName(int location){
 
-
-	if(parameter == 2) {
-		
 		if(location == 0) {
 			System.out.print(trailer.getName());
 		}else if (location == 1) {
@@ -311,58 +335,10 @@ Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 		}else if (location == 11) {
 			System.out.print(mainSt.getName());
 			
-	}else {
-		System.out.println("Not an index value");
-	}
-		
-	}
-
-/* if(parameter == 3) {
-if(location == 0) {
-moveCount(trailer);
-}else if (location == 1) {
-moveCount(hotel);
-}else if (location == 2) {
-moveCount(church);
-}else if (location == 3) {
-moveCount(bank);
-}else if (location == 4) {
-moveCount(ranch);
-}else if (location == 5) {
-moveCount(hideout);
-}else if (location == 6) {
-moveCount(casting);
-}else if (location == 7) {
-moveCount(train);
-}else if (location == 8) {
-moveCount(jail);
-}else if (location == 9) {
-moveCount(store);
-}else if (location == 10) {
-moveCount(saloon);
-}else if (location == 11) {
-moveCount(mainSt);
-}else {
-System.out.println("Not an index value");
-}
-}
-
-*/
-
-return;
-    
-
-  //  Scene[] scenes = new Scene[scene0,scene1,scene2,scene3,scene4,scene5,scene6,scene7,scene8,scene9,scene10,scene11,scene12,scene13,scene14,scene15,scene16,scene17,scene18,scene19,scene20,scene21,scene22,scene23,scene24,scene25,scene26,scene27,scene29,scene30,scene31,scene32,scene33,scene34,scene35,scene36,scene37,scene38,scene39];
-  //  Location[] locations = new Location[trailer, hotel, church, bank, ranch, hideout, casting, train, jail, store, saloon, mainSt];
-
-    for (int i = 0; i < scenes.length; i++){
-      System.out.println(scenes[i].getName());
-    }
-
-   /* for (int j = 0; j < locations.length; j++){
-      System.out.println(locations[j].getName());
-    }
-    */
+		}else {
+			System.out.println("Not an index value");
+		}
+	
   }
 
   public int[] moveCount(int location) {
@@ -427,10 +403,5 @@ return;
 	  }
 }
 
-  //this will have 10 scenes, all with budget, #of roles, and then rank of each role available
-public void resetBoard(){
-  //sets all used scenes to false -> unable to use again
-  //pairs new scenes with locations
-}
 
 }
