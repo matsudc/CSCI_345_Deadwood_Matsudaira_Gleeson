@@ -30,7 +30,7 @@ System.out.println("Welcome to Deadwood. The game of all games");
     startCredits = 4;
     }else if (playerCount < 9) {
     setDays = 4;
-    startRank = 1;
+    startRank = 2;
     } else {
     System.out.println("Too many players to player game");
     return;
@@ -61,11 +61,11 @@ System.out.println("Welcome to Deadwood. The game of all games");
     playerName[i] = name.nextLine();
         playersReal[i].Player(playerName[i]);
         if(startCredits > 0) {
-        playersReal[i].increaseCredits(startCredits, playerName[i]);
+        playersReal[i].increaseCredits(startCredits);
         }
    //set up each players starting credits
-   if(startRank == 1) {
-    playersReal[i].increaseRank(startRank, playerName[i]);
+   if(startRank == 2) {
+    playersReal[i].updateRank(startRank);
   }    
     i++;
     }
@@ -79,22 +79,10 @@ System.out.println("Welcome to Deadwood. The game of all games");
   //  System.out.println("Best of luck to you all! p.s I've got money on you " + playerName[rand_value] + " so dont mess this up.");
    
  
-
-
-
-
- 
-   
-    //while(dayCounter < setDays) {
-    //outer loop that will go until day done
-    //at end of loop:
-    // dayCounter ++;
-    // game.resetBoard();
-  //}
    
     int dayCounter = 1;  
     System.out.println("Day " + dayCounter + " has officaly begun!");
-    int j = 0;
+
    
     Board boardloc = new Board();
     int location;
@@ -103,10 +91,11 @@ System.out.println("Welcome to Deadwood. The game of all games");
     int dolla;
 
     //will be changed to while scene_num != 1 so each player will continue in this loop until only 1 scene left, then day resets and you go again.
-    int p = 0;
+    int scene_count = 10;
     //while(while daycounter != set days)
     //while scene_num != 1
-    while(p < 4) {
+    while(scene_count != 1) {
+        int j = 0;
    while(j < playerCount) {    
     location = playersReal[j].getLocation(playerName[j]);
 
@@ -135,7 +124,7 @@ String current_location = null;
     int moves[] = boardloc.moveCount(location);
     int x = 0;
     while(x < moves.length) {
-    boardloc.printName(moves[x], 2);
+    boardloc.printName(moves[x]);
     if(x + 1 != moves.length) {
     System.out.print(" or ");
     }
@@ -183,51 +172,8 @@ String current_location = null;
         }
        
         //What to do past moving:
-        if(current_location == "casting") {
-        System.out.println("Welcome to the casting office!");
-        System.out.println("You can upgrade your rank using Dollars or Credits!");
-        System.out.println("Rank 2 requires either 4 dollars or 5 credits");
-        System.out.println("Rank 3 requires either 10 dollars or 10 credits");
-        System.out.println("Rank 4 requires either 18 dollars or 15 credits");
-        System.out.println("Rank 5 requires either 28 dollars or 20 credits");
-        System.out.println("Rank 6 requires either 40 dollars or 25 credits");
-        System.out.println(playerName[j] + ", you currently are rank " + playersReal[j].getRank(playerName[j]) + " with "
-        + playersReal[j].getcredits(playerName[j]) + " credits and " + playersReal[j].getDollars(playerName[j]));
-        System.out.println("So would you like to upgrade your rank?");
-        System.out.println("Yes (y) or No (n)?");
-        Scanner upgrade_input = new Scanner(System.in);
-            String upgrade_choice = upgrade_input.nextLine();
-            if(upgrade_choice.equalsIgnoreCase("y")) {
-           
-            System.out.println("Will you use Credits (c) or Dollars (d)?");
-            Scanner upgrade_wealth_input = new Scanner(System.in);
-                String upgrade_wealth_choice = upgrade_wealth_input.nextLine();
-                if(upgrade_wealth_choice.equalsIgnoreCase("c")) {
-                if(playersReal[j].getcredits(playerName[j]) < 5) {
-                System.out.println("You dont have enough credits to upgrade, sorry");
-                }else if (playersReal[j].getcredits(playerName[j]) < 10) {
-                System.out.println("You can upgrade to rank 2 only");
-                if(playersReal[j].getRank(playerName[j]) >= 2) {
-                System.out.println("However, you are already at rank " + playersReal[j].getRank(playerName[j]) + " and cant down grade rank");
-                }else {
-                System.out.println("Continue upgrading to rank 2? Yes (y) or no (n) ");
-                        Scanner upgrade_decision_input = new Scanner(System.in);
-                            String upgrade_decision = upgrade_decision_input.nextLine();
-                            if(upgrade_decision.equalsIgnoreCase("y")) {
-                           
-                            }
-                }
-                }
-                }else if (upgrade_wealth_choice.equalsIgnoreCase("c")) {
-                dolla = playersReal[j].getDollars(playerName[j]);
-                //choose to use dollars. check to see if they can upgrade.
-                }else {
-                System.out.println("Failed to choose either option...");
-                }
-               
-            }else {
-            System.out.println("Oh well, hopefully you can upgrade next time!");
-            }      
+        if(current_location.equalsIgnoreCase("casting")) {
+        playersReal[j].upgrade();
         }else if(current_location != "trailer") {
         System.out.println("You are currently at " + current_location);
        
@@ -242,6 +188,15 @@ String current_location = null;
        
        
     }else if(choice.equalsIgnoreCase("w")) {
+    //check to see if in a scene able to work:
+    int location_value = playersReal[j].getLocation(playerName[j]);
+    current_location = boardloc.locationName(location_value);
+    if(current_location.equalsIgnoreCase("casting")) {
+    System.out.println("You are not able to work when at the " + current_location);
+    }else if(current_location.equalsIgnoreCase("trailer")) {
+    System.out.println("You are not able to work when at the " + current_location);
+    }else {
+   
     System.out.println("You choose to work! Do you want to be a star (s) or extra (e)?");
     Scanner acting_choice = new Scanner(System.in);
     String act_choice = acting_choice.nextLine();
@@ -259,8 +214,8 @@ String current_location = null;
         } else if (work_choice.equalsIgnoreCase("r")) {
         System.out.println("You choose to Rehearse!");
         System.out.println("You gained a Practice Chip!");
-        playersReal[j].increasePractice(playerName[j]);
-            System.out.println("This is " + playerName[j] + " practice chip count: " + playersReal[j].getPractice(playerName[j]));
+        playersReal[j].increasePractice();
+            System.out.println("This is " + playerName[j] + " practice chip count: " + playersReal[j].getPractice());
        
         } else {
         System.out.println("You didn't choose to act or rehearse, so we just will wait here");
@@ -279,8 +234,8 @@ String current_location = null;
         } else if (work_choice.equalsIgnoreCase("r")) {
         System.out.println("You choose to Rehearse!");
         System.out.println("You gained a Practice Chip!");
-        playersReal[j].increasePractice(playerName[j]);
-            System.out.println("This is " + playerName[j] + " practice chip count: " + playersReal[j].getPractice(playerName[j]));
+        playersReal[j].increasePractice();
+            System.out.println("This is " + playerName[j] + " practice chip count: " + playersReal[j].getPractice());
        
         } else {
         System.out.println("You didn't choose to act or rehearse, so your turn has ended");
@@ -288,12 +243,17 @@ String current_location = null;
     }else {
     System.out.println("You didnt choose which role, so your nothin!");
     }
+    }
     }else if(choice.equalsIgnoreCase("u")) {
     System.out.println("You choose to upgrade.");
+    int location_value = playersReal[j].getLocation(playerName[j]);
+    current_location = boardloc.locationName(location_value);
+    if(current_location.equalsIgnoreCase("casting")) {
+    playersReal[j].upgrade();
+    }else {
+    System.out.println("Not able to upgrade, not in casting office");
+    }
     //check to see if in upgrade room so can upgrade.
-    //if is in room. give player credits to make decison to upgrade.
-    //else
-    System.out.println("Lol your not in the casting office silly");
     }
     else {
     System.out.println("You didnt choose to move or work so we stay at same location");
@@ -303,7 +263,7 @@ String current_location = null;
     System.out.println();
     j++;
    }
-   p++;
+   scene_count--;
     }
     //reset board();
    
@@ -318,7 +278,6 @@ String current_location = null;
   public static int roll(){
     return (int)(Math.random()*6) + 1;
   }
-
 
   //calculates each players total score and then compares for winner
   public static void getScoreWinnner(){
