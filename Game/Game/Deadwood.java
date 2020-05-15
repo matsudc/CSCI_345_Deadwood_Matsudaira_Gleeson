@@ -1,8 +1,5 @@
 package Game;
 
-//import Game.Player;
-//import Game.Board;
-
 import java.util.Scanner;
 import java.util.Random;
 

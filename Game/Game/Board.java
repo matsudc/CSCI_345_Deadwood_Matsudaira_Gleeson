@@ -25,9 +25,6 @@ public class Board{
   // saloon = 10
   // main street = 11
   //------------------------------------
-Locaion[] locationArr;
-Scene[] sceneArr;
-
 int[] moving0 = new int[]{1, 10 , 11};
 Location trailer = new Location(0, "Trailer", moving0);
 // trailer.Location(0, "Trailer", moving);
@@ -153,33 +150,33 @@ Location mainSt = new Location(11, "MainSt", moving, rolling, 3);
 */
 
 if(parameter == 2) {
-  if(location == 0) {
-    System.out.print(trailer.getName());
-  }else if (location == 1) {
-    System.out.print(hotel.getName());
-  }else if (location == 2) {
-    System.out.print(church.getName());
-  }else if (location == 3) {
-    System.out.print(bank.getName());
-  }else if (location == 4) {
-    System.out.print(ranch.getName());
-  }else if (location == 5) {
-    System.out.print(hideout.getName());
-  }else if (location == 6) {
-    System.out.print(casting.getName());
-  }else if (location == 7) {
-    System.out.print(train.getName());
-  }else if (location == 8) {
-    System.out.print(jail.getName());
-  }else if (location == 9) {
-    System.out.print(store.getName());
-  }else if (location == 10) {
-    System.out.print(saloon.getName());
-  }else if (location == 11) {
-    System.out.print(mainSt.getName());
+if(location == 0) {
+System.out.print(trailer.getName());
+}else if (location == 1) {
+System.out.print(hotel.getName());
+}else if (location == 2) {
+System.out.print(church.getName());
+}else if (location == 3) {
+System.out.print(bank.getName());
+}else if (location == 4) {
+System.out.print(ranch.getName());
+}else if (location == 5) {
+System.out.print(hideout.getName());
+}else if (location == 6) {
+System.out.print(casting.getName());
+}else if (location == 7) {
+System.out.print(train.getName());
+}else if (location == 8) {
+System.out.print(jail.getName());
+}else if (location == 9) {
+System.out.print(store.getName());
+}else if (location == 10) {
+System.out.print(saloon.getName());
+}else if (location == 11) {
+System.out.print(mainSt.getName());
 }else {
-  System.out.println("Not an index value");
-  }
+System.out.println("Not an index value");
+}
 }
 
 /* if(parameter == 3) {
