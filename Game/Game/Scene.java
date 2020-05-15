@@ -14,7 +14,7 @@ public class Scene{
   String name;
   boolean use;
 
-  public void Scene(int num, String name, int budget, int[] roles){
+  public Scene(int num, String name, int budget, int[] roles){
     this.name = name;
     this.budget = budget;
     this.roles = roles;
@@ -22,7 +22,8 @@ public class Scene{
     this.sceneNum = num;
   }
 
-  public void updateUse(){
+
+public void updateUse(){
     this.use = false;
   }
 
