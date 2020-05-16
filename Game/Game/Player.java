@@ -98,7 +98,9 @@ this.name = name;
 this.location = new_location;
  }
 
-
+public void resetRole() {
+	this.roleRank = 0;
+}
 
  public void takeRole(int role, boolean card){
    //get role rank and save in rankRole

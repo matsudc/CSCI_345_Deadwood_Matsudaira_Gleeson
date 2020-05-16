@@ -53,4 +53,8 @@ String name;
   public int[] getMoves(){
     return this.moves;
   }
+  
+  public int getIndex() {
+	  return this.index;
+  }
 }
