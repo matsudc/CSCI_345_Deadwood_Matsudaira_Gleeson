@@ -3,6 +3,7 @@ package Game;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -696,16 +697,115 @@ System.out.println("Welcome to Deadwood. The game of all games");
         turn_check = true;
         //takes role at set at current location.
         System.out.println("You choose to work on the set");
+        System.out.println("You do not have a role.");
+        
+      //check to see if scenes available on set
+        
+        //check to see if wants to take a role
+         
+         Location playerLoc = boardloc.getLocation(playersReal[j].getLocation());
+         Scene locScene = board.get(playerLoc);
+         
+         int[] locRole = playerLoc.getRoles();
+         int[] sceneRole = locScene.sceneRoles();
+         
+         System.out.println("Would you like to take a role? y/n");
+         Scanner inputRole = new Scanner(System.in);
+         String takerole = inputRole.nextLine();
+         
+         if (takerole.equalsIgnoreCase("y")) {
+         	
+         	System.out.println("Would you like an on card role? y/n");
+         	Scanner inputCard = new Scanner(System.in);
+         	String cardRole = inputCard.nextLine();
+         	
+         	System.out.println("Your rank is " + playersReal[j].getRank());
+         	
+         	if (cardRole.equalsIgnoreCase("y")) {
+         		
+         		boolean valid = false;
+         		
+         		while(!valid) {
+         			
+         			System.out.println("Pick one of these on card roles.");
+         			System.out.println(Arrays.toString(sceneRole));
+         			
+         			Scanner roleChoose = new Scanner(System.in);
+         			String roleChoice = roleChoose.nextLine();
+         			
+         			try {
+         				int chooseRole = Integer.parseInt(roleChoice);
+         				
+         				boolean inRole = false;
+         				
+         				for(int q = 0; q < sceneRole.length; q++) {
+         					if (chooseRole == sceneRole[q]) {
+         						inRole = true;
+         						break;
+         					}
+         				}
+         				
+         				if (chooseRole >= playersReal[j].getRank() && inRole) {
+         					System.out.println("You now have this role.");
+         					playersReal[j].takeRole(chooseRole, true);
+         					valid = true;
+         				}
+         			} catch (Exception e) {
+         				System.out.println("Not a valid role");
+         			}
+         		}
+         		
+         		
+         		
+         	} else {
+         		
+         		boolean valid = false;
+         		
+         		while(!valid) {
+         			
+         			System.out.println("Pick one of these off card roles.");
+         			System.out.println(Arrays.toString(locRole));
+         			
+         			Scanner roleChoose = new Scanner(System.in);
+         			String roleChoice = roleChoose.nextLine();
+         			
+         			try {
+         				int chooseRole = Integer.parseInt(roleChoice);
+         				
+         				boolean inRole = false;
+         				
+         				for(int q = 0; q < locRole.length; q++) {
+         					if (chooseRole == locRole[q]) {
+         						inRole = true;
+         						break;
+         					}
+         				}
+         				
+         				if (chooseRole >= playersReal[j].getRank() && inRole) {
+         					System.out.println("You now have this role.");
+         					playersReal[j].takeRole(chooseRole, false);
+         					valid = true;
+         				}
+         			} catch (Exception e) {
+         				System.out.println("Not a valid choice.");
+         			}
+         		}
+         	}
+         	
+         } else {
+         	System.out.println("You did not take a role.");
+         	break;
+         }
         
         int location_value = playersReal[j].getLocation();
     	current_location = boardloc.locationName(location_value);
     
     
-        Location playerLoc = boardloc.getLocation(location_value);
-    	Scene locScene = board.get(playerLoc);
-    
-    	int[] locRole = playerLoc.getRoles();
-        int[] sceneRole = locScene.sceneRoles();
+//        Location playerLoc = boardloc.getLocation(location_value);
+//    	Scene locScene = board.get(playerLoc);
+//    
+//    	int[] locRole = playerLoc.getRoles();
+//        int[] sceneRole = locScene.sceneRoles();
     
     	int shot = playerLoc.getShot();
     	boolean onCard = playersReal[j].getCard();
@@ -905,6 +1005,8 @@ System.out.println("Welcome to Deadwood. The game of all games");
     			if (die_num + playersReal[j].getPractice() >= playersReal[j].getRoleRank()) {
     				System.out.println("Sucessful acting.");
     				playerLoc.updateShot();
+    				
+    				//playersReal[j].resetRole();
     	   
     				if (onCard) {
     					playersReal[j].increaseCredits(2);
@@ -918,6 +1020,14 @@ System.out.println("Welcome to Deadwood. The game of all games");
     				if (!onCard) {
     					playersReal[j].increaseDollars(1);
     				}
+    			}
+    			
+    			boolean sceneFin = checkScene(playerLoc);
+    			
+    			if (sceneFin) {
+    				System.out.println("Scene is wrapped.");
+    				bonus(playersReal, locScene, playerLoc);
+    				scene_count = scene_count - 1;
     			}
        
     		} else if (work_choice.equalsIgnoreCase("r")) {
@@ -964,16 +1074,56 @@ System.out.println("Welcome to Deadwood. The game of all games");
  }
  System.out.println("Congrats to " + color_array[max_pos] + " for being the winner of the game with a score of " + max);
   }
+  
+  public static boolean checkScene(Location loc) {
+	  
+	  int shot = loc.getShot();
+	  
+	  if (shot == 0) {
+		  return true;
+	  } else {
+		  return false;
+	  }
+  }
+  
+  public static void bonus(Player[] players, Scene scene, Location loc) {
+	  
+	  int budget = scene.getBudget();
+	  
+	  ArrayList<Player> playerOn = new ArrayList<Player>();
+	  ArrayList<Player> playerOff = new ArrayList<Player>();
+	  
+	  for (int i = 0; i < players.length; i ++) {
+		  if(players[i].getLocation() == loc.getIndex()) {
+			  if(players[i].getCard()) {
+				  playerOn.add(players[i]);
+			  }else {
+				  playerOff.add(players[i]);
+			  }
+		  }
+	  }
+	  
+	  
+	  if (!playerOn.isEmpty()) {
+		  
+		  if(!playerOff.isEmpty()) {
+			  
+			  for (Player p : playerOff) {
+				  p.increaseDollars(p.getRoleRank());
+			  }
+		  }
+		  
+		  int[] rolls = new int[budget];
+		  
+		  for (int w = 0; w < budget; w++) {
+			  rolls[w] = roll();
+		  }
+		  
+	  }
+  }
 
   public static int roll(){
     return (int)(Math.random()*6) + 1;
-  }
-
-  //calculates each players total score and then compares for winner
-  public static void getScoreWinnner(int playerCount){
- //1 point for every dollar, 1 for every credit, 5 * rank.
-
- 
   }
 
 }
