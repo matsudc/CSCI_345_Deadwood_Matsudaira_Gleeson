@@ -318,9 +318,11 @@ Scene scene40 = new Scene(0, "none", 0, rolling12);
 			return store;
 		}else if (index == 10) {
 			return saloon;
-		}else if (index == 11) {
+		}else {
 			return mainSt;
 		}
+		
+		
 	}
 	
   public void printName(int location){

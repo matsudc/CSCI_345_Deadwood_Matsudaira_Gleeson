@@ -35,7 +35,7 @@ public void updateUse(){
     this.roles[index] = -1;
   }
 
-  public int[] getRoles(){
+  public int[] sceneRoles(){
     return this.roles;
   }
 
