@@ -916,6 +916,8 @@ System.out.println("Welcome to Deadwood. The game of all games");
     			if (die_num + playersReal[j].getPractice() >= playersReal[j].getRoleRank()) {
     				System.out.println("Sucessful acting.");
     				playerLoc.updateShot();
+    				
+    				//playersReal[j].resetRole();
     	   
     				if (onCard) {
     					playersReal[j].increaseCredits(2);
@@ -930,7 +932,16 @@ System.out.println("Welcome to Deadwood. The game of all games");
     					playersReal[j].increaseDollars(1);
     				}
     			}
-       
+    			
+    			boolean sceneFin = checkScene(playerLoc);
+    			
+    			if (sceneFin) {
+    				System.out.println("Scene is wrapped.");
+    				bonus(playersReal, locScene, playerLoc);
+    				scene_count = scene_count - 1;
+    			}
+    			
+    	
     		} else if (work_choice.equalsIgnoreCase("r")) {
     			System.out.println("You choose to Rehearse!");
     			System.out.println("You gained a Practice Chip!");
@@ -1104,6 +1115,8 @@ System.out.println("Welcome to Deadwood. The game of all games");
 	  }
 	  
 	  
+	  
+	  
 	  if (!playerOn.isEmpty()) {
 		  
 		  if(!playerOff.isEmpty()) {
@@ -1112,15 +1125,61 @@ System.out.println("Welcome to Deadwood. The game of all games");
 				  p.increaseDollars(p.getRoleRank());
 			  }
 		  }
+		  Player[] playerMaxRole = new Player[playerOn.size()];
 		  
-		  int[] rolls = new int[budget];
+		  int maxRole = 0;
+		  int index = 0;
 		  
-		  for (int w = 0; w < budget; w++) {
-			  rolls[w] = roll();
+		  for (int p = 0; p < playerOn.size(); p++) {
+			  for (int y = 0; y < playerOn.size(); y++) {
+				  if (playerOn.get(p).getRoleRank() > maxRole) {
+					  index = p;
+					  maxRole = playerOn.get(p).getRoleRank();
+				  }
+				  
+				  playerMaxRole[p] = playerOn.get(index);
+				  maxRole = 0;
+			  }
+			  
 		  }
 		  
+		  ArrayList<Integer> rolls = new ArrayList<Integer>();
+		  
+		  for (int w = 0; w < budget; w++) {
+			  rolls.add(roll());
+		  }
+		   
+		  int sceneRoles = scene.sceneRoles().length;
+		  int[] roleScene = new int[sceneRoles];
+		  
+		  int max = 0;
+		  
+		  for (int t = 0; t < rolls.size(); t++) {
+			  for (int a : rolls) {
+				  if (a > max) {
+					  max = a;
+				  }
+			  }
+			  roleScene[t%sceneRoles] = roleScene[t%sceneRoles] + max;
+			  rolls.remove(max);
+			  max = 0;
+		  }
+		  
+		  for (int u = 0; 0 < roleScene.length; u++) {
+			  playerMaxRole[u].increaseDollars(roleScene[u]);
+		  }
+	  }
+	  
+	  for (Player r : playerOn) {
+		  r.resetPractice();
+		  r.resetRole();
+	  }
+	  for (Player b: playerOff) {
+		  b.resetPractice();
+		  b.resetRole();
 	  }
   }
+  
 
   public static int roll(){
     return (int)(Math.random()*6) + 1;
