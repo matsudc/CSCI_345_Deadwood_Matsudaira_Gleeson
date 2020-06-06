@@ -93,7 +93,7 @@ return this.rank;
  public int getLocation() {
 return this.location;
  }
- public void updateLocation(String name, int new_location) {
+ public void updateLocation(int new_location) {
 this.name = name;
 this.location = new_location;
  }
