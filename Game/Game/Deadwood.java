@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
 
+
 import Game.BoardLayersListener.boardMouseListener;
 
 import java.util.Random;
@@ -22,12 +23,20 @@ import java.util.Arrays;
 
 public class Deadwood{  
 
+
+
   public int die;
+ 
+//  BoardLayersListener board = new BoardLayersListener();
+
 
   public static void main(String[] args){
  
- BoardLayersListener board = new BoardLayersListener();
- board.setVisible(true);
+ Board boardloc = new Board();
+ //If we can figure this out, we would be good spot!
+ 
+ BoardLayersListener boardlaylist = new BoardLayersListener();
+ boardlaylist.setVisible(true);
 
    // Take input from the user about number of players
 //    JOptionPane.showInputDialog(layboard, "How many players?");
@@ -39,7 +48,7 @@ public class Deadwood{
  Scanner pCount = new Scanner(System.in);
 //  System.out.println("Enter number of players");
 //  JOptionPane.showInputDialog(layboard, "How many players?");
- counter =  JOptionPane.showInputDialog(board, "How many players?");
+ counter =  JOptionPane.showInputDialog(boardlaylist, "How many players?");
  playerCount = Integer.parseInt(counter);
  System.out.println("this is player count " + playerCount);
  int setDays = 0;
@@ -89,7 +98,7 @@ public class Deadwood{
  
 // board.updateStats(1);
  Scanner name = new Scanner(System.in);
- playerName[i] = JOptionPane.showInputDialog(board, "Please enter player " + (i + 1) + " name ");
+ playerName[i] = JOptionPane.showInputDialog(boardlaylist, "Please enter player " + (i + 1) + " name ");
 // System.out.println("Please enter player " + (i + 1) + " name ");
 //  playerName[i] = name.nextLine();
  playersReal[i].Player(playerName[i]);
@@ -106,7 +115,8 @@ public class Deadwood{
  String sdollars = Integer.toString(playersReal[i].getDollars());
  String scredits = Integer.toString(playersReal[i].getcredits ());
  String spractice = Integer.toString(playersReal[i].getPractice());
- board.playerStats(player_real, srank, sdollars, scredits, spractice, i);
+ boardlaylist.playerStats(player_real, srank, sdollars, scredits, spractice, i);
+ 
  i++;
  }
 
@@ -115,7 +125,7 @@ public class Deadwood{
  System.out.println("Day " + dayCounter + " has officaly begun!");
 
  
- Board boardloc = new Board();
+ 
  int location;
  int cred;
  int rank;
@@ -143,18 +153,10 @@ public class Deadwood{
  location = playersReal[j].getLocation();
  boolean turn_check = false;
  String current_location = null;
+       
+ boardlaylist.playersTurn(playersReal[j], boardloc, 1, hashboard);
  
- 
-//  System.out.println( playerName[j] + " rank: " + playersReal[j].getRank() );
-//  System.out.println(playerName[j] + " Dollar count: " + playersReal[j].getDollars());
-//  System.out.println(playerName[j] + " Fame (credit) count: " + playersReal[j].getcredits ());
-//  System.out.println(playerName[j] + " practice chip count: " + playersReal[j].getPractice());
-   
-
- 
-   
- System.out.println(playerName[j] + " you are at the " + boardloc.locationName(location) + ". What would you like to do on your turn?");
-   
+ System.out.println(playerName[j] + " you are at the " + boardloc.locationName(location) + ". What would you like to do on your turn?");    
  if(boardloc.locationName(location).equalsIgnoreCase("Trailer")) { //PLAYER LOCATION AT TRAILER
  System.out.println("You can Move (m) or do Nothing (n)");
  while(turn_check == false) {
@@ -167,7 +169,7 @@ public class Deadwood{
  turn_check = true;
    
  //move function
- current_location = moving(boardloc, location, playersReal[j], current_location);
+ current_location = moving(boardloc, location, playersReal[j], current_location, boardlaylist);
  //What to do past moving:
    
  if(current_location.equalsIgnoreCase("casting")) { //player moved to upgrade
@@ -196,7 +198,7 @@ public class Deadwood{
  }else if(choice.equalsIgnoreCase("m")) { //Player choose to MOVE
  turn_check = true;
  //move function
- current_location = moving(boardloc, location, playersReal[j], current_location);    
+ current_location = moving(boardloc, location, playersReal[j], current_location, boardlaylist);    
    
  if(current_location.equalsIgnoreCase("casting")) { //player moved to upgrade
  playersReal[j].upgrade();
@@ -229,7 +231,7 @@ public class Deadwood{
  turn_check = true;
  //move function
  
- current_location = moving(boardloc, location, playersReal[j], current_location);
+ current_location = moving(boardloc, location, playersReal[j], current_location, boardlaylist);
  //same move function
  
  //What to do past moving:
@@ -253,7 +255,7 @@ public class Deadwood{
  roll_call(boardloc, playersReal[j], hashboard);
    
  //work function
- working(boardloc, playersReal[j], current_location, hashboard, scene_count, playersReal);    
+ working(boardloc, playersReal[j], current_location, hashboard, scene_count, playersReal, boardlaylist);    
  }else {
  System.out.println("Must choose m, w, or n");
  }  
@@ -272,7 +274,7 @@ public class Deadwood{
  //takes role at set at current location.
  System.out.println("You choose to work on the set");
  //work function start  
- working(boardloc, playersReal[j], current_location, hashboard, scene_count, playersReal);  
+ working(boardloc, playersReal[j], current_location, hashboard, scene_count, playersReal, boardlaylist);  
  }else {
  System.out.println("Must choose w or n");
  }        
@@ -303,9 +305,10 @@ public class Deadwood{
  
   } //end of main
  
-  //function for move
+  //function for move  
  
-  public static String moving(Board boardloc, int location, Player playersReal, String current_location) {
+ 
+  public static String moving(Board boardloc, int location, Player playersReal, String current_location,  BoardLayersListener board) {
  System.out.println("You choose to move!");
  System.out.println("Where would you like to go?");      
  int moves[] = boardloc.moveCount(location);
@@ -318,6 +321,12 @@ public class Deadwood{
  x++;
  }
  System.out.println(" ");
+ int k = 1;
+ //call move function with moves[];
+
+
+ 
+ 
  boolean move_check = false;
  while(move_check == false) {
  Scanner move_input = new Scanner(System.in);
@@ -370,9 +379,9 @@ public class Deadwood{
  return current_location;
   }
  
-  public static void roll_call(Board boardloc, Player playerName, HashMap<Location, Scene> board){    
+  public static void roll_call(Board boardloc, Player playerName, HashMap<Location, Scene> hashboard){    
  Location playerLoc = boardloc.getLocation(playerName.getLocation());
- Scene locScene = board.get(playerLoc);
+ Scene locScene = hashboard.get(playerLoc);
  int[] locRole = playerLoc.getRoles();
  int[] sceneRole = locScene.sceneRoles();
  System.out.println("Would you like to take a role? y/n");
@@ -449,13 +458,13 @@ public class Deadwood{
  
  
   //function for work
-  public static void working(Board boardloc, Player player_name, String current_location, HashMap<Location, Scene> board,
- int scene_count, Player[] players ) {
+  public static void working(Board boardloc, Player player_name, String current_location, HashMap<Location, Scene> hashboard,
+ int scene_count, Player[] players,  BoardLayersListener board ) {
  
  int location_value = player_name.getLocation();
  current_location = boardloc.locationName(location_value);
  Location playerLoc = boardloc.getLocation(location_value);
- Scene locScene = board.get(playerLoc);
+ Scene locScene = hashboard.get(playerLoc);
  int shot = playerLoc.getShot();
  boolean onCard = player_name.getCard();
  location_value = player_name.getLocation();
@@ -499,7 +508,14 @@ public class Deadwood{
  System.out.println("This is " + player_name + " practice chip count: " + player_name.getPractice());  
  } else {
  System.out.println("You didn't choose to act or rehearse, so we just will wait here");
- }    
+ }
+ 
+ String player_real = player_name.getName();
+ String srank = Integer.toString(player_name.getRank());
+ String sdollars = Integer.toString(player_name.getDollars());
+ String scredits = Integer.toString(player_name.getcredits ());
+ String spractice = Integer.toString(player_name.getPractice());  
+//  board.updateStats(player_real, srank, sdollars, scredits, spractice);
   }
    
   public static boolean checkScene(Location loc) {  
