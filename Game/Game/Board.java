@@ -91,7 +91,7 @@ int [] rolling11 = new int[] {1,2,2,4};
 Location mainSt = new Location(11, "MainSt", moving11, rolling11, 3);
 
 int[] rolling12 = new int[] {0};
-Scene scene40 = new Scene(0, "none", 0, rolling12);
+Scene scene40 = new Scene(0, "none", 0, rolling12, "CardBack.jpg");
 
 
 
@@ -101,128 +101,128 @@ Scene scene40 = new Scene(0, "none", 0, rolling12);
 
 	public HashMap<Location, Scene> buildBoard() {
 		
-		//scene name = new scene(index, name, budget, int[roles])
+		//scene name = new scene(index, name, budget, int[roles], cardImg)
 			
 			
 			int[] roles = new int[] {2,3,4};
-		    Scene scene0 = new Scene(7, "Evil Wears a Hat", 4, roles);
+		    Scene scene0 = new Scene(7, "Evil Wears a Hat", 4, roles, "cards/01.png");
 		    
 		    roles = new int[]{2,4,6};
-		    Scene scene1 = new Scene(14, "Square Deal City", 6, roles);
+		    Scene scene1 = new Scene(14, "Square Deal City", 6, roles, "cards/06.png");
 		    
 		    roles = new int[] {1,2,5};
-		    Scene scene2 = new Scene(20, "Law and the Old West", 3, roles);
+		    Scene scene2 = new Scene(20, "Law and the Old West", 3, roles, "cards/02.png");
 		    
 		    roles = new int[] {4,6};
-		    Scene scene3 = new Scene(31, "Davy Crocket: A Drunkard's Tale", 4, roles);
+		    Scene scene3 = new Scene(31, "Davy Crocket: A Drunkard's Tale", 4, roles, "cards/07.png");
 		    
 		    roles = new int[] {5,6};
-		    Scene scene4 = new Scene(22, "Life and Times of John Skywater", 5, roles);
+		    Scene scene4 = new Scene(22, "Life and Times of John Skywater", 5, roles, "cards/03.png");
 		    
 		    roles = new int[] {2,4,5};
-		    Scene scene5 = new Scene(34, "The Way the West was Run", 4, roles);
+		    Scene scene5 = new Scene(34, "The Way the West was Run", 4, roles, "cards/08.png");
 		    
 		    roles = new int[] {3,4,6};
-		    Scene scene6 = new Scene(32, "My Years on the Prairie", 5, roles);
+		    Scene scene6 = new Scene(32, "My Years on the Prairie", 5, roles, "cards/04.png");
 		    
 		    roles = new int[] {1,3,5};
-		    Scene scene7 = new Scene(24, "Down in the Valley", 3, roles);
+		    Scene scene7 = new Scene(24, "Down in the Valley", 3, roles, "cards/09.png");
 		    
 		    roles = new int[] {2,3,5};
-		    Scene scene8 = new Scene(12, "Buffalo Bill: The Lost Years", 4, roles);
+		    Scene scene8 = new Scene(12, "Buffalo Bill: The Lost Years", 4, roles, "cards/05.png");
 		    
 		    roles = new int[] {1,2,4};
-		    Scene scene9 = new Scene(14, "Ol' Shooter and Little Doll", 4, roles);
+		    Scene scene9 = new Scene(14, "Ol' Shooter and Little Doll", 4, roles, "cards/10.png");
 		    
 		    roles = new int[] {1,4,5};
-		    Scene scene10 = new Scene(19, "The Robbers of Trains", 4, roles);
+		    Scene scene10 = new Scene(19, "The Robbers of Trains", 4, roles, "cards/11.png");
 		    
 		    roles = new int[] {2,4,5};
-		    Scene scene11 = new Scene(8, "Jesse James: Man of Action", 5, roles);
+		    Scene scene11 = new Scene(8, "Jesse James: Man of Action", 5, roles, "cards/16.png");
 		    
 		    roles = new int[] {6};
-		    Scene scene12 = new Scene(12, "Beyond the Pail: Life without Lactose", 2 , roles);
+		    Scene scene12 = new Scene(12, "Beyond the Pail: Life without Lactose", 2 , roles, "cards/12.png");
 		    
 		    roles = new int[] {2,3,4};
-		    Scene scene13 = new Scene(6, "Disaster at Flying J", 5, roles);
+		    Scene scene13 = new Scene(6, "Disaster at Flying J", 5, roles, "cards/17.png");
 		    
 		    roles = new int[] {3,6};
-		    Scene scene14 = new Scene(16, "A Man Called “Cow”", 3, roles);
+		    Scene scene14 = new Scene(16, "A Man Called “Cow”", 3, roles, "cards/13.png");
 		    
 		    roles = new int[] {1,3,4};
-		    Scene scene15 = new Scene(23, "Shakespeare in Lubbock", 3, roles);
+		    Scene scene15 = new Scene(23, "Shakespeare in Lubbock", 3, roles, "cards/18.png");
 		    
 		    roles = new int[] {3,4};
-		    Scene scene16 = new Scene(2, "Taffy Commercial", 2, roles);
+		    Scene scene16 = new Scene(2, "Taffy Commercial", 2, roles, "cards/14.png");
 		    
 		    roles = new int[] {4,6};
-		    Scene scene17 = new Scene(30, "Go West, You!", 3, roles);
+		    Scene scene17 = new Scene(30, "Go West, You!", 3, roles, "cards/19.png");
 		    
 		    roles = new int[] {2,4};
-		    Scene scene18 = new Scene(3, "Gum Commercial", 2, roles);
+		    Scene scene18 = new Scene(3, "Gum Commercial", 2, roles, "cards/15.png");
 		    
 		    roles = new int[] {3,5,6};
-		    Scene scene19 = new Scene(15, "The Life and Times of John Skywater", 5, roles);
+		    Scene scene19 = new Scene(15, "The Life and Times of John Skywater", 5, roles, "cards/20.png");
 		    
 		    roles = new int[] {4,5,6};
-		    Scene scene20 = new Scene(25, "Gun! The Musical", 6, roles);
+		    Scene scene20 = new Scene(25, "Gun! The Musical", 6, roles, "cards/21.png");
 		    
 		    roles = new int[] {1,2,5};
-		    Scene scene21 = new Scene(21, "One False Step for Mankind", 6, roles);
+		    Scene scene21 = new Scene(21, "One False Step for Mankind", 6, roles, "cards/26.png");
 		    
 		    roles = new int[] {2,4,5};
-		    Scene scene22 = new Scene(16, "Humor at the Expense of Others", 5, roles);
+		    Scene scene22 = new Scene(16, "Humor at the Expense of Others", 5, roles, "cards/22.png");
 		    
 		    roles = new int[] {1,3,5};
-		    Scene scene23 = new Scene(15, "Thirteen the Hard Way", 5, roles);
+		    Scene scene23 = new Scene(15, "Thirteen the Hard Way", 5, roles, "cards/27.png");
 		    
 		    roles = new int[] {5,6};
-		    Scene scene24 = new Scene(12, "The Search for Maggie White", 6, roles);
+		    Scene scene24 = new Scene(12, "The Search for Maggie White", 6, roles, "cards/23.png");
 		    
 		    roles = new int[] {2,3,4};
-		    Scene scene25 = new Scene(2, "How They Get Milk", 4, roles);
+		    Scene scene25 = new Scene(2, "How They Get Milk", 4, roles, "cards/28.png");
 		    
 		    roles = new int[] {3,5};
-		    Scene scene26 = new Scene(1, "Picante Sauce Commercial", 2, roles);
+		    Scene scene26 = new Scene(1, "Picante Sauce Commercial", 2, roles, "cards/24.png");
 		    
 		    roles = new int[] {2,3,5};
-		    Scene scene27 = new Scene(27, "My Years on the Prairie", 5, roles);
+		    Scene scene27 = new Scene(27, "My Years on the Prairie", 5, roles, "cards/29.png");
 		    
 		    roles = new int[] {1,4,6};
-		    Scene scene28 = new Scene(14, "Jesse James: Man of Action", 5, roles);
+		    Scene scene28 = new Scene(14, "Jesse James: Man of Action", 5, roles, "cards/25.png");
 		    
 		    roles = new int[] {2,3,4};
-		    Scene scene29 = new Scene(12, "Davy Crockett: A Drunkard’s Tale", 4, roles);
+		    Scene scene29 = new Scene(12, "Davy Crockett: A Drunkard’s Tale", 4, roles, "cards/30.png");
 		    
 		    roles = new int[] {5,6};
-		    Scene scene30 = new Scene(25, "Czechs in the Sonora", 4, roles);
+		    Scene scene30 = new Scene(25, "Czechs in the Sonora", 4, roles, "cards/31.png");
 		    
 		    roles = new int[] {1,2,5};
-		    Scene scene31 = new Scene(13, "J. Robert Lucky, Man of Substance", 4, roles);
+		    Scene scene31 = new Scene(13, "J. Robert Lucky, Man of Substance", 4, roles, "cards/36.png");
 		    
 		    roles = new int[] {1,3,5};
-		    Scene scene32 = new Scene(19, "Swing 'em Wide", 6, roles);
+		    Scene scene32 = new Scene(19, "Swing 'em Wide", 6, roles, "cards/32.png");
 		    
 		    roles = new int[] {2,4,5};
-		    Scene scene33 = new Scene(17, "Thirteen the Hard Way", 5, roles);
+		    Scene scene33 = new Scene(17, "Thirteen the Hard Way", 5, roles, "cards/37.png");
 
 		    roles = new int[] {3,5,6};
-		    Scene scene34 = new Scene(35, "Swing 'em Wide", 6, roles);
+		    Scene scene34 = new Scene(35, "Swing 'em Wide", 6, roles, "cards/33.png");
 		    
 		    roles = new int[] {4,5,6};
-		    Scene scene35 = new Scene(8, "How They Get Milk", 4, roles);
+		    Scene scene35 = new Scene(8, "How They Get Milk", 4, roles, "cards/38.png");
 		    
 		    roles = new int[] {2,4,5};
-		    Scene scene36 = new Scene(5, "Trials of the First Pioneers", 4, roles);
+		    Scene scene36 = new Scene(5, "Trials of the First Pioneers", 4, roles, "cards/34.png");
 		    
 		    roles = new int[] {2,6};
-		    Scene scene37 = new Scene(19, "Breakin’ in Trick Ponies", 3, roles);
+		    Scene scene37 = new Scene(19, "Breakin’ in Trick Ponies", 3, roles, "cards/39.png");
 		    
 		    roles = new int[] {3,4,5};
-		    Scene scene38 = new Scene(9, "How the Grinch Stole Texas", 5, roles);
+		    Scene scene38 = new Scene(9, "How the Grinch Stole Texas", 5, roles, "cards/35.png");
 		    
 		    roles = new int[] {2,4,6};
-		    Scene scene39 = new Scene(40, "Custer’s Other Stands", 5, roles);
+		    Scene scene39 = new Scene(40, "Custer’s Other Stands", 5, roles, "cards/40.png");
 		   
 		
 		Location[] locationArr = new Location[] { hotel, church, bank, ranch, hideout, train, jail, store, saloon, mainSt};
