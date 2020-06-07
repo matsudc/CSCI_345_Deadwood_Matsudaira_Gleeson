@@ -28,24 +28,30 @@ public class BoardLayersListener extends JFrame {
   JLabel mRehearse;
 
   //JButtons
+
   JButton bLocation0;
   JButton bLocation1;
   JButton bLocation2;
   JButton bLocation3;
+
   JButton bRoll;
   JButton bAct;
   JButton bRehearse;
   JButton bMove;
   JButton bUpgrade;
+
   JButton bYes;
   JButton bNo;
+
 
   // JLayered Pane
   JLayeredPane bPane;
 
   Player current_player;
   Board b_boardloc;
+
   HashMap<Location, Scene> boardPairs;
+
   // Constructor
 
   public BoardLayersListener() {
@@ -155,34 +161,39 @@ public class BoardLayersListener extends JFrame {
        playerlabel.setBounds(114,227,46,46);
        playerlabel.setVisible(false);
        bPane.add(playerlabel,new Integer(3));
+
        }
+
+
+   
 
   }
  
   public void playerStats(String player, String rank, String dollars, String credits, String rehearsal, int i){
- i = i * 100;
- ImageIcon icon =  new ImageIcon("board.jpg");
- String real_player = player;
- mLabel = new JLabel(real_player);
- mRank = new JLabel("Rank: " + rank);
- mDollars = new JLabel("Dollars: " +dollars);
- mFame = new JLabel("Fame: " +credits);
- mRehearse = new JLabel("Practice: " + rehearsal);
+	  i = i * 100;
+	  ImageIcon icon =  new ImageIcon("board.jpg");
+	  String real_player = player;
+	  mLabel = new JLabel(real_player);
+	  mRank = new JLabel("Rank: " + rank);
+	  mDollars = new JLabel("Dollars: " +dollars);
+	  mFame = new JLabel("Fame: " +credits);
+	  mRehearse = new JLabel("Practice: " + rehearsal);
 
  
- mLabel.setBounds(icon.getIconWidth()+20 + i,400,100, 20);
- mRank.setBounds(icon.getIconWidth()+20 + i,420,100, 20);
- mDollars.setBounds(icon.getIconWidth()+20 + i,440,100, 20);
- mFame.setBounds(icon.getIconWidth()+20 + i,460,100, 20);
- mRehearse.setBounds(icon.getIconWidth()+20 + i,480,100, 20);
- bPane.add(mLabel,new Integer(2));
- bPane.add(mRank,new Integer(2));
- bPane.add(mDollars,new Integer(2));
- bPane.add(mFame,new Integer(2));
- bPane.add(mRehearse,new Integer(2));
+	  mLabel.setBounds(icon.getIconWidth()+20 + i,400,100, 20);
+	  mRank.setBounds(icon.getIconWidth()+20 + i,420,100, 20);
+	  mDollars.setBounds(icon.getIconWidth()+20 + i,440,100, 20);
+	  mFame.setBounds(icon.getIconWidth()+20 + i,460,100, 20);
+	  mRehearse.setBounds(icon.getIconWidth()+20 + i,480,100, 20);
+	  bPane.add(mLabel,new Integer(2));
+	  bPane.add(mRank,new Integer(2));
+	  bPane.add(mDollars,new Integer(2));
+	  bPane.add(mFame,new Integer(2));
+	  bPane.add(mRehearse,new Integer(2));
  
  }
  
+
   public void playersTurn(Player player, Board boardloc, int x, HashMap<Location, Scene> hashboard) {
  ImageIcon icon =  new ImageIcon("board.jpg");
  
@@ -219,6 +230,7 @@ public class BoardLayersListener extends JFrame {
  bUpgrade.setBackground(Color.white);
  bUpgrade.setBounds(icon.getIconWidth()+10, 60,100, 20);
  bUpgrade.addMouseListener(new boardMouseListener());
+
 
      
      // Place the action buttons in the top layer
@@ -268,6 +280,7 @@ public class BoardLayersListener extends JFrame {
  bRoll.addMouseListener(new boardMouseListener());
 
      
+
      // Place the action buttons in the top layer
  bPane.add(bMove, new Integer(2));
  bPane.add(bRoll, new Integer(2));
@@ -373,6 +386,7 @@ public class BoardLayersListener extends JFrame {
       public void mouseClicked(MouseEvent e) {
           int location = current_player.getLocation();
           int moves[] = b_boardloc.moveCount(location);
+
          if (e.getSource()== bAct){
             playerlabel.setVisible(true);
             System.out.println("Acting is Selected\n");
@@ -381,6 +395,7 @@ public class BoardLayersListener extends JFrame {
             System.out.println("Rehearse is Selected\n");
          }
          else if (e.getSource()== bMove){
+
         bPane.remove(bMove);
         moveChoices();
          //   System.out.println("Move is Selected\n");
@@ -420,6 +435,7 @@ public class BoardLayersListener extends JFrame {
         System.out.println("No Roll is Selected\n");
         bPane.remove(bNo);
         return;
+
          }
       }
      

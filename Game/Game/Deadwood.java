@@ -22,15 +22,18 @@ import java.util.Arrays;
 
 
 public class Deadwood{  
+	
 
 
 
   public int die;
  
+
 //  BoardLayersListener board = new BoardLayersListener();
 
 
   public static void main(String[] args){
+
  
  Board boardloc = new Board();
  //If we can figure this out, we would be good spot!
@@ -38,9 +41,45 @@ public class Deadwood{
  BoardLayersListener boardlaylist = new BoardLayersListener();
  boardlaylist.setVisible(true);
 
-   // Take input from the user about number of players
+
+	    // Take input from the user about number of players
 //    JOptionPane.showInputDialog(layboard, "How many players?");
+	  	  
+//	  System.out.println("Welcome to Deadwood. The game of all games");
+	  
+	  String counter;
+	  int playerCount;
+	  Scanner pCount = new Scanner(System.in);
+	//  System.out.println("Enter number of players");
+	//  JOptionPane.showInputDialog(layboard, "How many players?");
+	  counter =  JOptionPane.showInputDialog(boardlaylist, "How many players?");
+	  playerCount = Integer.parseInt(counter);
+	  System.out.println("this is player count " + playerCount);
+	  int setDays = 0;
+	  int startCredits = 0;
+	  int startRank = 0;
+	  if(playerCount < 4 && playerCount != 1) {
+		  setDays = 3;
+	  }else if(playerCount == 4) {
+		  setDays = 4;
+	  }else if (playerCount == 5) {
+  		 setDays = 4;
+  		 startCredits = 2;
+	  }else if (playerCount == 6) {
+		  setDays = 4;
+		  	startCredits = 4;
+	  }else if (playerCount < 9) {
+		  setDays = 4;
+		  startRank = 2;
+	  } else {
+		  System.out.println("Too many players to player game");
+		  return;
+	  }
+	  
+	  String[] playerName = new String[playerCount];
+	  int i = 0;
    
+
 //  System.out.println("Welcome to Deadwood. The game of all games");
  
  String counter;
@@ -87,11 +126,13 @@ public class Deadwood{
 //  String[] arr = new String[] {"blue", "cyan", "green", "orange", "pink", "red", "violet", "yellow"};
  String[] color_array = new String[playerCount];
  Player [] playersReal = new Player[playerCount];
+
    
- for(int k = 0; k < playerCount; k++) {
-//     color_array[k] = arr[k];
- playersReal[k] = players[k];
- }
+	  for(int k = 0; k < playerCount; k++) {
+//    	color_array[k] = arr[k];
+		  playersReal[k] = players[k];
+	  }
+
 
  
  while (i < playerCount) {
@@ -120,9 +161,11 @@ public class Deadwood{
  i++;
  }
 
+
    
- int dayCounter = 1;  
- System.out.println("Day " + dayCounter + " has officaly begun!");
+	  int dayCounter = 1;  
+	  System.out.println("Day " + dayCounter + " has officaly begun!");
+
 
  
  
@@ -130,15 +173,15 @@ public class Deadwood{
  int cred;
  int rank;
  int dolla;
-   
- boolean next = false;
- HashMap<Location, Scene> hashboard = new HashMap<Location,Scene>();
 
- //will be changed to while scene_num != 1 so each player will continue in this loop until only 1 scene left, then day resets and you go again.
- int scene_count = 10;
- //while(while daycounter != set days)
    
- 
+	  boolean next = false;
+	  HashMap<Location, Scene> hashboard = new HashMap<Location,Scene>();
+
+	  //will be changed to while scene_num != 1 so each player will continue in this loop until only 1 scene left, then day resets and you go again.
+	  int scene_count = 10;
+	  //while(while daycounter != set days)
+    
  while (dayCounter != setDays) {  
  if (!next) {
  //board = newBoard.buildBoard();
@@ -400,64 +443,66 @@ public class Deadwood{
  boolean valid = false;
 
 
- System.out.println("Pick one of these on card roles.");
- System.out.println(Arrays.toString(sceneRole));
- 
+				
+			  System.out.println("Pick one of these on card roles.");
+			  System.out.println(Arrays.toString(sceneRole));
+			  
 
- while(!valid) {
- Scanner roleChoose = new Scanner(System.in);
- String roleChoice = roleChoose.nextLine();
- int chooseRole = Integer.parseInt(roleChoice);
- boolean inRole = false;
- for(int q = 0; q < sceneRole.length; q++) {
- if (chooseRole == sceneRole[q]) {
- inRole = true;
- break;
- }
- }
- if (chooseRole <= playerName.getRank() && inRole) {
- System.out.println("You now have this role.");
- playerName.takeRole(chooseRole, true);
- valid = true;
- } else if (chooseRole > playerName.getRank()) {
- System.out.println("Please choose a role thats equal or less than your rank.");
- }else {          
- System.out.println("Not a valid role. Did you change your mind? y/n");
- }                        
- }
- } else {
- boolean valid = false;
- while(!valid) {
- System.out.println("Pick one of these off card roles.");
- System.out.println(Arrays.toString(locRole));
- Scanner roleChoose = new Scanner(System.in);
- String roleChoice = roleChoose.nextLine();
- try {
- int chooseRole = Integer.parseInt(roleChoice);
- boolean inRole = false;
- for(int q = 0; q < locRole.length; q++) {
- if (chooseRole == locRole[q]) {
- inRole = true;
- break;
- }
- }
- if (chooseRole >= playerName.getRank() && inRole) {
- System.out.println("You now have this role.");
- playerName.takeRole(chooseRole, false);
- valid = true;
- }
- } catch (Exception e) {
- System.out.println("Not a valid choice.");
- }
- }
- }
- } else {
- System.out.println("You did not take a role.");
- }  
+			  while(!valid) {
+				  Scanner roleChoose = new Scanner(System.in);
+				  String roleChoice = roleChoose.nextLine();
+				  int chooseRole = Integer.parseInt(roleChoice);
+				  boolean inRole = false;
+				  for(int q = 0; q < sceneRole.length; q++) {
+					  if (chooseRole == sceneRole[q]) {
+						  inRole = true;
+						  break;
+					  }
+				  }
+				  if (chooseRole <= playerName.getRank() && inRole) {
+					  System.out.println("You now have this role.");
+					  playerName.takeRole(chooseRole, true);
+					  valid = true;
+				  } else if (chooseRole > playerName.getRank()) {
+					  System.out.println("Please choose a role thats equal or less than your rank.");
+				  }else {           				
+					  System.out.println("Not a valid role. Did you change your mind? y/n");
+				  }            		            			
+			  }	
+		  } else {
+			  boolean valid = false;
+			  while(!valid) {
+				  System.out.println("Pick one of these off card roles.");
+				  System.out.println(Arrays.toString(locRole));
+				  Scanner roleChoose = new Scanner(System.in);
+				  String roleChoice = roleChoose.nextLine();
+				  try {
+					  int chooseRole = Integer.parseInt(roleChoice);
+					  boolean inRole = false;						
+					  for(int q = 0; q < locRole.length; q++) {
+						  if (chooseRole == locRole[q]) {
+							  inRole = true;
+							  break;
+						  }
+					  }	
+					  if (chooseRole >= playerName.getRank() && inRole) {
+						  System.out.println("You now have this role.");
+						  playerName.takeRole(chooseRole, false);
+						  valid = true;
+					  }
+				  } catch (Exception e) {
+					  System.out.println("Not a valid choice.");
+				  }
+			  }
+		  }			
+	  } else {
+		  System.out.println("You did not take a role.");
+	  }	  
   }
- 
- 
+  
+  
   //function for work
+
   public static void working(Board boardloc, Player player_name, String current_location, HashMap<Location, Scene> hashboard,
  int scene_count, Player[] players,  BoardLayersListener board ) {
  
@@ -516,98 +561,99 @@ public class Deadwood{
  String scredits = Integer.toString(player_name.getcredits ());
  String spractice = Integer.toString(player_name.getPractice());  
 //  board.updateStats(player_real, srank, sdollars, scredits, spractice);
+
   }
    
-  public static boolean checkScene(Location loc) {  
- int shot = loc.getShot();  
- if (shot == 0) {
- return true;
- } else {
- return false;
- }
+  public static boolean checkScene(Location loc) {	  
+	  int shot = loc.getShot();  
+	  if (shot == 0) {
+		  return true;
+	  } else {
+		  return false;
+	  }
   }
- 
-  public static void bonus(Player[] players, Scene scene, Location loc) {  
- int budget = scene.getBudget();  
- ArrayList<Player> playerOn = new ArrayList<Player>();
- ArrayList<Player> playerOff = new ArrayList<Player>();  
- for (int i = 0; i < players.length; i ++) {
- if(players[i].getLocation() == loc.getIndex()) {
- if(players[i].getCard()) {
- playerOn.add(players[i]);
- }else {
- playerOff.add(players[i]);
- }
- }
- }  
- if (!playerOn.isEmpty()) {
- if(!playerOff.isEmpty()) {
- for (Player p : playerOff) {
- p.increaseDollars(p.getRoleRank());
- }
- }
- Player[] playerMaxRole = new Player[playerOn.size()];  
- int maxRole = 0;
- int index = 0;  
- for (int p = 0; p < playerOn.size(); p++) {
- for (int y = 0; y < playerOn.size(); y++) {
- if (playerOn.get(p).getRoleRank() > maxRole) {
- index = p;
- maxRole = playerOn.get(p).getRoleRank();
- }
- playerMaxRole[p] = playerOn.get(index);
- maxRole = 0;
- }  
- }  
- ArrayList<Integer> rolls = new ArrayList<Integer>();  
- for (int w = 0; w < budget; w++) {
- rolls.add(roll());
- }  
- int sceneRoles = scene.sceneRoles().length;
- int[] roleScene = new int[sceneRoles];  
- int max = 0;
- for (int t = 0; t < rolls.size(); t++) {
- for (int a : rolls) {
- if (a > max) {
- max = a;
- }
- }
- roleScene[t%sceneRoles] = roleScene[t%sceneRoles] + max;
- rolls.remove(max);
- max = 0;
- }  
- for (int u = 0; 0 < roleScene.length; u++) {
- playerMaxRole[u].increaseDollars(roleScene[u]);
- }
- }  
- for (Player r : playerOn) {
- r.resetPractice();
- r.resetRole();
- }
- for (Player b: playerOff) {
- b.resetPractice();
- b.resetRole();
- }
+  
+  public static void bonus(Player[] players, Scene scene, Location loc) {	  
+	  int budget = scene.getBudget();	  
+	  ArrayList<Player> playerOn = new ArrayList<Player>();
+	  ArrayList<Player> playerOff = new ArrayList<Player>();	  
+	  for (int i = 0; i < players.length; i ++) {
+		  if(players[i].getLocation() == loc.getIndex()) {
+			  if(players[i].getCard()) {
+				  playerOn.add(players[i]);
+			  }else {
+				  playerOff.add(players[i]);
+			  }
+		  }
+	  }	  
+	  if (!playerOn.isEmpty()) {			
+		  if(!playerOff.isEmpty()) {				
+			  for (Player p : playerOff) {
+				  p.increaseDollars(p.getRoleRank());
+			  }
+		  }
+		  Player[] playerMaxRole = new Player[playerOn.size()];		  
+		  int maxRole = 0;
+		  int index = 0;	  
+		  for (int p = 0; p < playerOn.size(); p++) {
+			  for (int y = 0; y < playerOn.size(); y++) {
+				  if (playerOn.get(p).getRoleRank() > maxRole) {
+					  index = p;
+					  maxRole = playerOn.get(p).getRoleRank();
+				  }					
+				  playerMaxRole[p] = playerOn.get(index);
+				  maxRole = 0;
+			  }		  
+		  }		  
+		  ArrayList<Integer> rolls = new ArrayList<Integer>();	  
+		  for (int w = 0; w < budget; w++) {
+			  rolls.add(roll());
+		  }		   
+		  int sceneRoles = scene.sceneRoles().length;
+		  int[] roleScene = new int[sceneRoles];		  
+		  int max = 0; 			
+		  for (int t = 0; t < rolls.size(); t++) {
+			  for (int a : rolls) {
+				  if (a > max) {
+					  max = a;
+				  }
+			  }
+			  roleScene[t%sceneRoles] = roleScene[t%sceneRoles] + max;
+			  rolls.remove(max);
+			  max = 0;
+		  }		  
+		  for (int u = 0; 0 < roleScene.length; u++) {
+			  playerMaxRole[u].increaseDollars(roleScene[u]);
+		  }
+	  }	  
+	  for (Player r : playerOn) {
+		  r.resetPractice();
+		  r.resetRole();
+	  }
+	  for (Player b: playerOff) {
+		  b.resetPractice();
+		  b.resetRole();
+	  }
   }
    
   public static int roll(){
- return (int)(Math.random()*6) + 1;
+	  return (int)(Math.random()*6) + 1;
   }
- 
- 
+  
+  
 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 }
