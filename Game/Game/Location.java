@@ -14,20 +14,33 @@ int shot;
 int[] role;
 int[] moves;
 String name;
+int[] area; //[x, y, h ,w]
+int[][] offCardArea;
 
- public Location(int index, String name, int[] moves){
+ public Location(int index, String name, int[] moves, int[] area){
     this.index = index;
     this.name = name;
     this.moves = moves;
+    this.area = area;
   }
 
 
-  public Location(int index, String name, int[] moves, int[] roles, int shot){
+  public Location(int index, String name, int[] moves, int[] roles, int shot, int[] area, int[][] offCardArea){
     this.index = index;
     this.name = name;
     this.moves = moves;
     this.shot = shot;
     this.role = roles;
+    this.area = area;
+    this.offCardArea = offCardArea;
+  }
+  
+  public int[] getArea() {
+	  return this.area;
+  }
+  
+  public int[][] getOffCardArea(){
+	  return this.offCardArea;
   }
 
   public int[] getRoles(){

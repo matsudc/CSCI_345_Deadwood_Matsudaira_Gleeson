@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
+import java.util.HashMap;
+
 import javax.swing.JOptionPane;
 
 public class BoardLayersListener extends JFrame {
@@ -26,19 +28,30 @@ public class BoardLayersListener extends JFrame {
   JLabel mRehearse;
 
   //JButtons
-  JButton bLocation;
+
+  JButton bLocation0;
+  JButton bLocation1;
+  JButton bLocation2;
+  JButton bLocation3;
+
   JButton bRoll;
   JButton bAct;
   JButton bRehearse;
   JButton bMove;
   JButton bUpgrade;
 
+  JButton bYes;
+  JButton bNo;
+
+
   // JLayered Pane
   JLayeredPane bPane;
 
   Player current_player;
   Board b_boardloc;
-  
+
+  HashMap<Location, Scene> boardPairs;
+
   // Constructor
 
   public BoardLayersListener() {
@@ -63,12 +76,75 @@ public class BoardLayersListener extends JFrame {
        // Set the size of the GUI
        setSize(icon.getIconWidth()+200,icon.getIconHeight());
 
-       // Add a scene card to this room
-       cardlabel = new JLabel();
-       ImageIcon cIcon =  new ImageIcon("cards/cards/01.png");
-       cardlabel.setIcon(cIcon);
-       cardlabel.setBounds(20,65,cIcon.getIconWidth()+2,cIcon.getIconHeight());
-       cardlabel.setOpaque(true);
+// Add a scene card to this room
+       
+       int i = 0;
+       
+       while (i < 12) {
+    	   
+    	   if (i == 0 || i == 6) {
+    		   i++;
+    	   } else if (i ==1) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(969, 740, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==2) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(623, 734, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==3) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(623, 475, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==4) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(252, 478, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==5) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(27, 732, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==7) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(21, 69, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==8) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(281, 27, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==9) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(370, 282, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==10) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(632, 280, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   } else if (i ==11) {
+    		   cardlabel = new JLabel();
+    	       ImageIcon cIcon =  new ImageIcon("CardBack.jpg");
+    	       cardlabel.setIcon(cIcon);
+    	       cardlabel.setBounds(969, 28, 115, 205);
+    	       cardlabel.setOpaque(true);
+    	   }
 
        // Add the card to the lower layer
        bPane.add(cardlabel, new Integer(1));
@@ -86,7 +162,10 @@ public class BoardLayersListener extends JFrame {
        playerlabel.setVisible(false);
        bPane.add(playerlabel,new Integer(3));
 
-            
+       }
+
+
+   
 
   }
  
@@ -114,146 +193,200 @@ public class BoardLayersListener extends JFrame {
  
  }
  
-  public void playersTurn(Player player, Board boardloc) {
-	  
-	  int location = player.getLocation();
-	  boardloc.locationName(location).equalsIgnoreCase("Trailer");
-	  ImageIcon icon =  new ImageIcon("board.jpg");
-      // Create the Menu for action buttons
-	  
-	  mLabel = new JLabel("MENU");
+
+  public void playersTurn(Player player, Board boardloc, int x, HashMap<Location, Scene> hashboard) {
+ ImageIcon icon =  new ImageIcon("board.jpg");
+ 
+   mLabel = new JLabel("Select your action");
       mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
       bPane.add(mLabel,new Integer(2));
-      
-	  if(boardloc.locationName(location).equalsIgnoreCase("Trailer")) {
-		  
-	      bMove = new JButton("MOVE");
-	      bMove.setBackground(Color.white);
-	      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
-	      bMove.addMouseListener(new boardMouseListener());
-	      
-	      // Place the action buttons in the top layer
-	      bPane.add(bMove, new Integer(2));		  		 
-	      
-	      
-	  }//at casting office
-	  else if(boardloc.locationName(location).equalsIgnoreCase("Casting")) {
-		  
-	      bMove = new JButton("MOVE");
-	      bMove.setBackground(Color.white);
-	      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
-	      bMove.addMouseListener(new boardMouseListener());
-	      
-		  bUpgrade = new JButton("UPGRADE");
-		  bUpgrade.setBackground(Color.white);
-		  bUpgrade.setBounds(icon.getIconWidth()+10, 60,100, 20);
-		  bUpgrade.addMouseListener(new boardMouseListener());
+ 
+ System.out.println("We are in players turn");
+ int location = player.getLocation();
+ boardloc.locationName(location).equalsIgnoreCase("Trailer");
+      // Create the Menu for action buttons
+ 
+      System.out.println("Current location is " + boardloc.locationName(location));
+ if(boardloc.locationName(location).equalsIgnoreCase("Trailer")) {
+ 
+     bMove = new JButton("MOVE");
+     bMove.setBackground(Color.white);
+     bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+     bMove.addMouseListener(new boardMouseListener());
+     
+     // Place the action buttons in the top layer
+     bPane.add(bMove, new Integer(2));  
+     
+     
+ }//at casting office
+ else if(boardloc.locationName(location).equalsIgnoreCase("Casting")) {
+ 
+     bMove = new JButton("MOVE");
+     bMove.setBackground(Color.white);
+     bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+     bMove.addMouseListener(new boardMouseListener());
+     
+ bUpgrade = new JButton("UPGRADE");
+ bUpgrade.setBackground(Color.white);
+ bUpgrade.setBounds(icon.getIconWidth()+10, 60,100, 20);
+ bUpgrade.addMouseListener(new boardMouseListener());
 
-	      
-	      // Place the action buttons in the top layer
-	      bPane.add(bMove, new Integer(2));
-	      bPane.add(bUpgrade, new Integer(2));
-		
-		  
-		  
-	  }//on a set
-	  else {
-		  //doesnt have role
-		  if(player.roleRank == -1) {
-		  
-		      bMove = new JButton("MOVE");
-		      bMove.setBackground(Color.white);
-		      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
-		      bMove.addMouseListener(new boardMouseListener());
-		      
-		      bRoll = new JButton("ROLE");
-		      bRoll.setBackground(Color.white);
-		      bRoll.setBounds(icon.getIconWidth()+10, 60,100, 20);
-		      bRoll.addMouseListener(new boardMouseListener());
 
-		      
-		      // Place the action buttons in the top layer
-		      bPane.add(bMove, new Integer(2));
-		      bPane.add(bRoll, new Integer(2));		
-		      
-		  }
-		  else {
-			  
-			  bAct = new JButton("ACT");
-			  bAct.setBackground(Color.white);
-			  bAct.setBounds(icon.getIconWidth()+10,30,100, 20);
-			  bAct.addMouseListener(new boardMouseListener());
-		      
-			  bRehearse = new JButton("REHEARSE");
-			  bRehearse.setBackground(Color.white);
-			  bRehearse.setBounds(icon.getIconWidth()+10, 60,100, 20);
-			  bRehearse.addMouseListener(new boardMouseListener());
-		      
-		      // Place the action buttons in the top layer
-		      bPane.add(bAct, new Integer(2));
-		      bPane.add(bRehearse, new Integer(2));				  
-		  }
-		  
-	  }	 
-	 current_player = player;
-	 b_boardloc = boardloc;
-	  
+     
+     // Place the action buttons in the top layer
+     bPane.add(bMove, new Integer(2));
+     bPane.add(bUpgrade, new Integer(2));
+
+ 
+ 
+ }//on a set
+ else {
+ //doesnt have role
+ if(player.roleRank == -1) {
+ 
+ 
+ if(x == 0) {
+ bPane.remove(mLabel);
+ mLabel = new JLabel("Take a Role?");
+     mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
+     bPane.add(mLabel,new Integer(2));
+ 
+ 
+     bYes = new JButton("Yes");
+     bYes.setBackground(Color.white);
+     bYes.setBounds(icon.getIconWidth()+10, 30,100, 20);
+     bYes.addMouseListener(new boardMouseListener());
+     
+     bPane.add(bYes, new Integer(2));
+     
+     bNo = new JButton("No");
+     bNo.setBackground(Color.white);
+     bNo.setBounds(icon.getIconWidth()+10, 60,100, 20);
+     bNo.addMouseListener(new boardMouseListener());
+     
+     bPane.add(bNo, new Integer(2));
+     
+ bPane.remove(mLabel);
+ }else {
+ 
+ bMove = new JButton("MOVE");
+ bMove.setBackground(Color.white);
+ bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+ bMove.addMouseListener(new boardMouseListener());
+     
+ bRoll = new JButton("ROLL");
+ bRoll.setBackground(Color.white);
+ bRoll.setBounds(icon.getIconWidth()+10, 60,100, 20);
+ bRoll.addMouseListener(new boardMouseListener());
+
+     
+
+     // Place the action buttons in the top layer
+ bPane.add(bMove, new Integer(2));
+ bPane.add(bRoll, new Integer(2));
+ }
+ }
+ else {
+ 
+ bAct = new JButton("ACT");
+ bAct.setBackground(Color.white);
+ bAct.setBounds(icon.getIconWidth()+10,30,100, 20);
+ bAct.addMouseListener(new boardMouseListener());
+     
+ bRehearse = new JButton("REHEARSE");
+ bRehearse.setBackground(Color.white);
+ bRehearse.setBounds(icon.getIconWidth()+10, 60,100, 20);
+ bRehearse.addMouseListener(new boardMouseListener());
+     
+     // Place the action buttons in the top layer
+     bPane.add(bAct, new Integer(2));
+     bPane.add(bRehearse, new Integer(2));  
+ }
+ 
+ }
+ bPane.remove(mLabel);
+ boardPairs = hashboard;
+ current_player = player;
+ b_boardloc = boardloc;
+ 
   }
-  
-  
+ 
+ 
   public void moveChoices() {
-	//  System.out.println("we are in move choices");
-      ImageIcon icon =  new ImageIcon("board.jpg");   
+      ImageIcon icon =  new ImageIcon("board.jpg");
+   mLabel = new JLabel("Where to?");
+      mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
+      bPane.add(mLabel,new Integer(2));
+ //  System.out.println("we are in move choices");
       int location = current_player.getLocation();
       int moves[] = b_boardloc.moveCount(location);
-      System.out.println("This is moves[] " + moves);
-      if(moves.length == 3) {         
-          bLocation = new JButton(b_boardloc.locationName(moves[0]));
-          bLocation.setBackground(Color.white);
-          bLocation.setBounds(icon.getIconWidth()+10, 30,100, 20);
-          bLocation.addMouseListener(new boardMouseListener());
-          
-          bLocation = new JButton(b_boardloc.locationName(moves[1]));
-          bLocation.setBackground(Color.white);
-          bLocation.setBounds(icon.getIconWidth()+10, 60,100, 20);
-          bLocation.addMouseListener(new boardMouseListener());
-          
-          bLocation = new JButton(b_boardloc.locationName(moves[2]));
-          bLocation.setBackground(Color.white);
-          bLocation.setBounds(icon.getIconWidth()+10, 90,100, 20);
-          bLocation.addMouseListener(new boardMouseListener());
-          
-	  } else { //move length is 4
-		   bLocation = new JButton(b_boardloc.locationName(moves[0]));
-		   bLocation.setBackground(Color.white);
-		   bLocation.setBounds(icon.getIconWidth()+10, 30,100, 20);
-		   bLocation.addMouseListener(new boardMouseListener());
-	          
-		   bLocation = new JButton(b_boardloc.locationName(moves[1]));
-		   bLocation.setBackground(Color.white);
-		   bLocation.setBounds(icon.getIconWidth()+10, 60,100, 20);
-		   bLocation.addMouseListener(new boardMouseListener());
-	          
-		   bLocation = new JButton(b_boardloc.locationName(moves[2]));
-		   bLocation.setBackground(Color.white);
-		   bLocation.setBounds(icon.getIconWidth()+10, 90,100, 20);
-		   bLocation.addMouseListener(new boardMouseListener());
-	          
-		   bLocation = new JButton(b_boardloc.locationName(moves[2]));
-		   bLocation.setBackground(Color.white);
-		   bLocation.setBounds(icon.getIconWidth()+10, 120,100, 20);
-		   bLocation.addMouseListener(new boardMouseListener());
-	  }
+      if(moves.length == 3) {        
+          bLocation0 = new JButton(b_boardloc.locationName(moves[0]));
+          bLocation0.setBackground(Color.white);
+          bLocation0.setBounds(icon.getIconWidth()+10, 30,100, 20);
+          bLocation0.addMouseListener(new boardMouseListener());
+         
+          bLocation1 = new JButton(b_boardloc.locationName(moves[1]));
+          bLocation1.setBackground(Color.white);
+          bLocation1.setBounds(icon.getIconWidth()+10, 60,100, 20);
+          bLocation1.addMouseListener(new boardMouseListener());
+         
+          bLocation2 = new JButton(b_boardloc.locationName(moves[2]));
+          bLocation2.setBackground(Color.white);
+          bLocation2.setBounds(icon.getIconWidth()+10, 90,100, 20);
+          bLocation2.addMouseListener(new boardMouseListener());
+         
+          bPane.add(bLocation0, new Integer(2));
+     bPane.add(bLocation1, new Integer(2));
+     bPane.add(bLocation2, new Integer(2));
+         
+     
+ } else { //move length is 4
+  bLocation0 = new JButton(b_boardloc.locationName(moves[0]));
+  bLocation0.setBackground(Color.white);
+  bLocation0.setBounds(icon.getIconWidth()+10, 30,100, 20);
+  bLocation0.addMouseListener(new boardMouseListener());
+         
+  bLocation1 = new JButton(b_boardloc.locationName(moves[1]));
+  bLocation1.setBackground(Color.white);
+  bLocation1.setBounds(icon.getIconWidth()+10, 60,100, 20);
+  bLocation1.addMouseListener(new boardMouseListener());
+         
+  bLocation2 = new JButton(b_boardloc.locationName(moves[2]));
+  bLocation2.setBackground(Color.white);
+  bLocation2.setBounds(icon.getIconWidth()+10, 90,100, 20);
+  bLocation2.addMouseListener(new boardMouseListener());
+         
+  bLocation3 = new JButton(b_boardloc.locationName(moves[2]));
+  bLocation3.setBackground(Color.white);
+  bLocation3.setBounds(icon.getIconWidth()+10, 120,100, 20);
+  bLocation3.addMouseListener(new boardMouseListener());
+ 
+  bPane.add(bLocation0, new Integer(2));
+  bPane.add(bLocation1, new Integer(2));
+  bPane.add(bLocation2, new Integer(2));
+  bPane.add(bLocation3, new Integer(2));    
+ 
+ }
+      bPane.remove(mLabel);
   }
    
+  public void rollChoices() {
 
+
+
+
+
+  }
   // This class implements Mouse Events
 
   class boardMouseListener implements MouseListener{
 
       // Code for the different button clicks
       public void mouseClicked(MouseEvent e) {
-     
+          int location = current_player.getLocation();
+          int moves[] = b_boardloc.moveCount(location);
+
          if (e.getSource()== bAct){
             playerlabel.setVisible(true);
             System.out.println("Acting is Selected\n");
@@ -262,10 +395,50 @@ public class BoardLayersListener extends JFrame {
             System.out.println("Rehearse is Selected\n");
          }
          else if (e.getSource()== bMove){
-        	moveChoices();
-            System.out.println("Move is Selected\n");
+
+        bPane.remove(bMove);
+        moveChoices();
+         //   System.out.println("Move is Selected\n");
+         }else if ((e.getSource()== bLocation0) || (e.getSource()== bLocation1) || (e.getSource()== bLocation2) || (e.getSource()== bLocation3)) {
+       
+        if(moves.length == 3) {
+        System.out.println("Removing 3");
+        bPane.remove(bLocation0);
+        bPane.remove(bLocation1);
+        bPane.remove(bLocation2);
+        }else {
+        System.out.println("Removing 4");
+        bPane.remove(bLocation0);
+        bPane.remove(bLocation1);
+        bPane.remove(bLocation2);
+        bPane.remove(bLocation3);
+        }
+       
+        if(e.getSource()== bLocation0) {
+        current_player.updateLocation(moves[0]);
+        }else if(e.getSource()== bLocation1) {
+        current_player.updateLocation(moves[1]);
+        }else if (e.getSource()== bLocation2) {
+        current_player.updateLocation(moves[2]);
+        }else {
+        current_player.updateLocation(moves[3]);
+        }            
+        playersTurn(current_player, b_boardloc, 0, boardPairs );
+        System.out.println("Location is Selected\n");
+       
+         }
+         else if(e.getSource() == bYes) {
+        System.out.println("Roll is Selected\n");
+        bPane.remove(bYes);
+       
+         }else if(e.getSource() == bNo) {
+        System.out.println("No Roll is Selected\n");
+        bPane.remove(bNo);
+        return;
+
          }
       }
+     
       public void mousePressed(MouseEvent e) {
       }
       public void mouseReleased(MouseEvent e) {
