@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="Game/" kind="src" path=""/>
-	<classpathentry kind="src" path="Game"/>
+	<classpathentry excluding="Game/|cards/cards/|dice/dice/" kind="src" path=""/>
+	<classpathentry kind="src" path="Game">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="CSCI_345_Deadwood_Matsudaira_Gleeson/Game"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="cards/cards"/>
+	<classpathentry kind="src" path="dice/dice"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
