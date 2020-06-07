@@ -26,13 +26,19 @@ public class BoardLayersListener extends JFrame {
   JLabel mRehearse;
 
   //JButtons
+  JButton bLocation;
+  JButton bRoll;
   JButton bAct;
   JButton bRehearse;
   JButton bMove;
+  JButton bUpgrade;
 
   // JLayered Pane
   JLayeredPane bPane;
 
+  Player current_player;
+  Board b_boardloc;
+  
   // Constructor
 
   public BoardLayersListener() {
@@ -80,66 +86,166 @@ public class BoardLayersListener extends JFrame {
        playerlabel.setVisible(false);
        bPane.add(playerlabel,new Integer(3));
 
-       // Create the Menu for action buttons
-       mLabel = new JLabel("MENU");
-       mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
-       bPane.add(mLabel,new Integer(2));
-
-       // Create Action buttons
-       bAct = new JButton("ACT");
-       bAct.setBackground(Color.white);
-       bAct.setBounds(icon.getIconWidth()+10, 30,100, 20);
-       bAct.addMouseListener(new boardMouseListener());
-
-       bRehearse = new JButton("REHEARSE");
-       bRehearse.setBackground(Color.white);
-       bRehearse.setBounds(icon.getIconWidth()+10,60,100, 20);
-       bRehearse.addMouseListener(new boardMouseListener());
-
-       bMove = new JButton("MOVE");
-       bMove.setBackground(Color.white);
-       bMove.setBounds(icon.getIconWidth()+10,90,100, 20);
-       bMove.addMouseListener(new boardMouseListener());
-
-       // Place the action buttons in the top layer
-       bPane.add(bAct, new Integer(2));
-       bPane.add(bRehearse, new Integer(2));
-       bPane.add(bMove, new Integer(2));
-       
-       
-       mLabel = new JLabel("MENU");
-       mRank = new JLabel("rawr");
-       mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
-       bPane.add(mLabel,new Integer(2));
-       
+            
 
   }
  
   public void playerStats(String player, String rank, String dollars, String credits, String rehearsal, int i){
- i = i * 100;
- ImageIcon icon =  new ImageIcon("board.jpg");
- String real_player = player;
- mLabel = new JLabel(real_player);
- mRank = new JLabel("Rank: " + rank);
- mDollars = new JLabel("Dollars: " +dollars);
- mFame = new JLabel("Fame: " +credits);
- mRehearse = new JLabel("Practice: " + rehearsal);
+	  i = i * 100;
+	  ImageIcon icon =  new ImageIcon("board.jpg");
+	  String real_player = player;
+	  mLabel = new JLabel(real_player);
+	  mRank = new JLabel("Rank: " + rank);
+	  mDollars = new JLabel("Dollars: " +dollars);
+	  mFame = new JLabel("Fame: " +credits);
+	  mRehearse = new JLabel("Practice: " + rehearsal);
 
  
- mLabel.setBounds(icon.getIconWidth()+20 + i,400,100, 20);
- mRank.setBounds(icon.getIconWidth()+20 + i,420,100, 20);
- mDollars.setBounds(icon.getIconWidth()+20 + i,440,100, 20);
- mFame.setBounds(icon.getIconWidth()+20 + i,460,100, 20);
- mRehearse.setBounds(icon.getIconWidth()+20 + i,480,100, 20);
- bPane.add(mLabel,new Integer(2));
- bPane.add(mRank,new Integer(2));
- bPane.add(mDollars,new Integer(2));
- bPane.add(mFame,new Integer(2));
- bPane.add(mRehearse,new Integer(2));
+	  mLabel.setBounds(icon.getIconWidth()+20 + i,400,100, 20);
+	  mRank.setBounds(icon.getIconWidth()+20 + i,420,100, 20);
+	  mDollars.setBounds(icon.getIconWidth()+20 + i,440,100, 20);
+	  mFame.setBounds(icon.getIconWidth()+20 + i,460,100, 20);
+	  mRehearse.setBounds(icon.getIconWidth()+20 + i,480,100, 20);
+	  bPane.add(mLabel,new Integer(2));
+	  bPane.add(mRank,new Integer(2));
+	  bPane.add(mDollars,new Integer(2));
+	  bPane.add(mFame,new Integer(2));
+	  bPane.add(mRehearse,new Integer(2));
  
  }
  
- 
+  public void playersTurn(Player player, Board boardloc) {
+	  
+	  int location = player.getLocation();
+	  boardloc.locationName(location).equalsIgnoreCase("Trailer");
+	  ImageIcon icon =  new ImageIcon("board.jpg");
+      // Create the Menu for action buttons
+	  
+	  mLabel = new JLabel("MENU");
+      mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
+      bPane.add(mLabel,new Integer(2));
+      
+	  if(boardloc.locationName(location).equalsIgnoreCase("Trailer")) {
+		  
+	      bMove = new JButton("MOVE");
+	      bMove.setBackground(Color.white);
+	      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+	      bMove.addMouseListener(new boardMouseListener());
+	      
+	      // Place the action buttons in the top layer
+	      bPane.add(bMove, new Integer(2));		  		 
+	      
+	      
+	  }//at casting office
+	  else if(boardloc.locationName(location).equalsIgnoreCase("Casting")) {
+		  
+	      bMove = new JButton("MOVE");
+	      bMove.setBackground(Color.white);
+	      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+	      bMove.addMouseListener(new boardMouseListener());
+	      
+		  bUpgrade = new JButton("UPGRADE");
+		  bUpgrade.setBackground(Color.white);
+		  bUpgrade.setBounds(icon.getIconWidth()+10, 60,100, 20);
+		  bUpgrade.addMouseListener(new boardMouseListener());
+
+	      
+	      // Place the action buttons in the top layer
+	      bPane.add(bMove, new Integer(2));
+	      bPane.add(bUpgrade, new Integer(2));
+		
+		  
+		  
+	  }//on a set
+	  else {
+		  //doesnt have role
+		  if(player.roleRank == -1) {
+		  
+		      bMove = new JButton("MOVE");
+		      bMove.setBackground(Color.white);
+		      bMove.setBounds(icon.getIconWidth()+10,30,100, 20);
+		      bMove.addMouseListener(new boardMouseListener());
+		      
+		      bRoll = new JButton("ROLE");
+		      bRoll.setBackground(Color.white);
+		      bRoll.setBounds(icon.getIconWidth()+10, 60,100, 20);
+		      bRoll.addMouseListener(new boardMouseListener());
+
+		      
+		      // Place the action buttons in the top layer
+		      bPane.add(bMove, new Integer(2));
+		      bPane.add(bRoll, new Integer(2));		
+		      
+		  }
+		  else {
+			  
+			  bAct = new JButton("ACT");
+			  bAct.setBackground(Color.white);
+			  bAct.setBounds(icon.getIconWidth()+10,30,100, 20);
+			  bAct.addMouseListener(new boardMouseListener());
+		      
+			  bRehearse = new JButton("REHEARSE");
+			  bRehearse.setBackground(Color.white);
+			  bRehearse.setBounds(icon.getIconWidth()+10, 60,100, 20);
+			  bRehearse.addMouseListener(new boardMouseListener());
+		      
+		      // Place the action buttons in the top layer
+		      bPane.add(bAct, new Integer(2));
+		      bPane.add(bRehearse, new Integer(2));				  
+		  }
+		  
+	  }	 
+	 current_player = player;
+	 b_boardloc = boardloc;
+	  
+  }
+  
+  
+  public void moveChoices() {
+	//  System.out.println("we are in move choices");
+      ImageIcon icon =  new ImageIcon("board.jpg");   
+      int location = current_player.getLocation();
+      int moves[] = b_boardloc.moveCount(location);
+      System.out.println("This is moves[] " + moves);
+      if(moves.length == 3) {         
+          bLocation = new JButton(b_boardloc.locationName(moves[0]));
+          bLocation.setBackground(Color.white);
+          bLocation.setBounds(icon.getIconWidth()+10, 30,100, 20);
+          bLocation.addMouseListener(new boardMouseListener());
+          
+          bLocation = new JButton(b_boardloc.locationName(moves[1]));
+          bLocation.setBackground(Color.white);
+          bLocation.setBounds(icon.getIconWidth()+10, 60,100, 20);
+          bLocation.addMouseListener(new boardMouseListener());
+          
+          bLocation = new JButton(b_boardloc.locationName(moves[2]));
+          bLocation.setBackground(Color.white);
+          bLocation.setBounds(icon.getIconWidth()+10, 90,100, 20);
+          bLocation.addMouseListener(new boardMouseListener());
+          
+	  } else { //move length is 4
+		   bLocation = new JButton(b_boardloc.locationName(moves[0]));
+		   bLocation.setBackground(Color.white);
+		   bLocation.setBounds(icon.getIconWidth()+10, 30,100, 20);
+		   bLocation.addMouseListener(new boardMouseListener());
+	          
+		   bLocation = new JButton(b_boardloc.locationName(moves[1]));
+		   bLocation.setBackground(Color.white);
+		   bLocation.setBounds(icon.getIconWidth()+10, 60,100, 20);
+		   bLocation.addMouseListener(new boardMouseListener());
+	          
+		   bLocation = new JButton(b_boardloc.locationName(moves[2]));
+		   bLocation.setBackground(Color.white);
+		   bLocation.setBounds(icon.getIconWidth()+10, 90,100, 20);
+		   bLocation.addMouseListener(new boardMouseListener());
+	          
+		   bLocation = new JButton(b_boardloc.locationName(moves[2]));
+		   bLocation.setBackground(Color.white);
+		   bLocation.setBounds(icon.getIconWidth()+10, 120,100, 20);
+		   bLocation.addMouseListener(new boardMouseListener());
+	  }
+  }
+   
 
   // This class implements Mouse Events
 
@@ -148,9 +254,6 @@ public class BoardLayersListener extends JFrame {
       // Code for the different button clicks
       public void mouseClicked(MouseEvent e) {
      
-     
-     
-
          if (e.getSource()== bAct){
             playerlabel.setVisible(true);
             System.out.println("Acting is Selected\n");
@@ -159,6 +262,7 @@ public class BoardLayersListener extends JFrame {
             System.out.println("Rehearse is Selected\n");
          }
          else if (e.getSource()== bMove){
+        	moveChoices();
             System.out.println("Move is Selected\n");
          }
       }
@@ -170,6 +274,7 @@ public class BoardLayersListener extends JFrame {
       }
       public void mouseExited(MouseEvent e) {
       }
+
    }
  
 }
