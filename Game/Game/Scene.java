@@ -13,13 +13,19 @@ public class Scene{
   int[] roles;
   String name;
   boolean use;
+  String cardImg;
 
-  public Scene(int num, String name, int budget, int[] roles){
+  public Scene(int num, String name, int budget, int[] roles, String img){
     this.name = name;
     this.budget = budget;
     this.roles = roles;
     this.use = true;
     this.sceneNum = num;
+    this.cardImg = img;
+  }
+  
+  public String getCardImg() {
+	  return this.cardImg;
   }
 
 

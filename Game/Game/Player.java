@@ -32,6 +32,10 @@ int roleRank;
    this.roleRank = -1;
  }
  
+ public String getName() {
+	 return this.name;
+ }
+ 
  public int getRoleRank() {
 	 return this.roleRank;
  }
